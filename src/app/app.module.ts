@@ -5,7 +5,10 @@ import { MyApp } from './app.component';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { LoginPage} from '../pages/login/login';
 import { SignupPage  } from '../pages/signup/signup';
- 
+
+import { ForgotPassPage } from "../pages/forgot-pass/forgot-pass";
+import { OtpPage } from "../pages/otp/otp";
+
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -20,24 +23,31 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,LoginPage,WelcomePage,SignupPage
+    TabsPage,
+    LoginPage,
+    WelcomePage,
+    SignupPage,
+    ForgotPassPage,
+    OtpPage
   ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp)
-  ],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,LoginPage,WelcomePage,SignupPage
+    TabsPage,
+    LoginPage,
+    WelcomePage,
+    SignupPage,
+    ForgotPassPage,
+    OtpPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule {}
