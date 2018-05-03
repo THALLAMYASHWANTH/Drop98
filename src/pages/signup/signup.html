@@ -7,12 +7,32 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Signup1</ion-title>
+    <ion-title>Signup</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <form (ngSubmit)="register()">
+
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="formData.name" name="name" clearInput="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="formData.email" name="email" clearInput="true"></ion-input>
+    </ion-item>
+
+    <ion-item margin-bottom>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="formData.pass" name="pass" clearInput="true"></ion-input>
+    </ion-item>
+
+    <button ion-button block type="submit">Register</button>
+  </form>
 
 </ion-content>
