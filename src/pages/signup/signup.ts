@@ -10,16 +10,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-signup',
-  templateUrl: 'signup.html',
+  selector: "page-signup",
+  templateUrl: "signup.html"
 })
 export class SignupPage {
+  public formData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.formData = {};
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
+    console.log("ionViewDidLoad SignupPage");
   }
-
 }

@@ -13,7 +13,31 @@
 </ion-header>
 
 
+<<<<<<< HEAD
 <ion-content padding>
   <h2>user name</h2>
+=======
+<ion-content padding id="back">
+
+<form (ngSubmit)="login()">
+
+  <ion-item style="background: color(#dbddbd);">
+    <ion-label floating>Phone Number</ion-label>
+    <ion-input type="number" class="form-control" #inputPhone name="phone"  [(ngModel)]="formData.phone"></ion-input>
+
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-input type="password" [(ngModel)]="formData.pass" name="pass" clearInput="true"></ion-input>
+  </ion-item>
+  <p text-right>
+    <button ion-button clear type="button" (click)="goToForgotPass()">Forgot password</button>
+  </p>
+
+  <button ion-button block type="submit">Login</button>
+</form>
+
+>>>>>>> fd2bdd0c3d8d229fa21d5d2ed302e0b717ee7324
 
 </ion-content>
