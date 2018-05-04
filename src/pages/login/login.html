@@ -13,11 +13,11 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding id="back">
 
 <form (ngSubmit)="login()">
 
-  <ion-item>
+  <ion-item style="background: color(#dbddbd);">
     <ion-label floating>Phone Number</ion-label>
     <ion-input type="number" class="form-control" #inputPhone name="phone"  [(ngModel)]="formData.phone"></ion-input>
 
