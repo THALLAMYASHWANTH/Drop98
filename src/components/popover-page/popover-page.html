@@ -1,7 +1,7 @@
 <ion-list>
-  <ion-list-header>Ionic</ion-list-header>
-  <button ion-item (click)="close()">Learn Ionic</button>
-  <button ion-item (click)="close()">Documentation</button>
-  <button ion-item (click)="close()">Showcase</button>
-  <button ion-item (click)="close()">GitHub Repo</button>
+  <ion-list-header>{{user}}</ion-list-header>
+  <button ion-item (click)="close()">My Profile</button>
+  <button ion-item (click)="close()">Change Password</button>
+  <button ion-item (click)="close()">Upload Photo</button>
+  <button ion-item (click)="logout()" ng-click="popover.hide()">Logout</button>
 </ion-list>

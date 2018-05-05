@@ -26,7 +26,7 @@ export class DashboardPage {
     public menu: MenuController,
     private popoverCtrl: PopoverController
   ) {
-    this.pages = [{ title: "Hello Ionic", component: HelloIonicPage }, { title: "My First List", component: ListPage }];
+    this.pages = [{ title: "Dashboard", component: HelloIonicPage }, { title: "Billing Management", component: ListPage }];
   }
 
   ionViewDidLoad() {
