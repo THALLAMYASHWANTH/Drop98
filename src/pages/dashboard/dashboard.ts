@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
 import { IonicPage, NavController, NavParams, MenuController, PopoverController } from 'ionic-angular';
 import { PopoverPageComponent } from "../../components/popover-page/popover-page";
+import { ListPage } from "../list/list";
 
 /**
  * Generated class for the DashboardPage page.
@@ -19,13 +20,14 @@ export class DashboardPage {
   content: ElementRef;
   @ViewChild("popoverText", { read: ElementRef })
   text: ElementRef;
+  pages: Array<{ title: string; component: any }>;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    menu: MenuController,
+    public menu: MenuController,
     private popoverCtrl: PopoverController
   ) {
-    menu.enable(true);
+    this.pages = [{ title: "List", component: ListPage }];
   }
 
   ionViewDidLoad() {
