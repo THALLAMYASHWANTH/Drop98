@@ -4,13 +4,7 @@ import { TabsPage } from '../tabs/tabs';
 import { ForgotPassPage } from '../forgot-pass/forgot-pass';
 import { DashboardPage } from '../dashboard/dashboard';
 import { Storage } from "@ionic/storage";
-import {
-  SecureStorage,
-  SecureStorageObject
-} from "@ionic-native/secure-storage";
-import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
-import { NativeStorage } from "@ionic-native/native-storage";
+
 import {Observable} from 'rxjs';
 
 
@@ -22,7 +16,6 @@ import {Observable} from 'rxjs';
 export class LoginPage {
   public formData: any;
   constructor(
-    private nativeStorage: NativeStorage,
     public navCtrl: NavController,
     public navParams: NavParams,
     private storage: Storage
