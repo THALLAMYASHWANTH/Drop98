@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from "@angular/core";
+import { IonicPage, NavController, NavParams, MenuController, PopoverController } from 'ionic-angular';
+import { PopoverPageComponent } from "../../components/popover-page/popover-page";
 
 /**
  * Generated class for the DashboardPage page.
@@ -10,16 +11,34 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-dashboard',
-  templateUrl: 'dashboard.html',
+  selector: "page-dashboard",
+  templateUrl: "dashboard.html"
 })
 export class DashboardPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild("popoverContent", { read: ElementRef })
+  content: ElementRef;
+  @ViewChild("popoverText", { read: ElementRef })
+  text: ElementRef;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    menu: MenuController,
+    private popoverCtrl: PopoverController
+  ) {
+    menu.enable(true);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardPage');
+    console.log("ionViewDidLoad DashboardPage");
   }
+  presentPopover(ev) {
+    let popover = this.popoverCtrl.create(PopoverPageComponent, {
+      contentEle: this.content.nativeElement,
+      textEle: this.text.nativeElement
+    });
 
+    popover.present({
+      ev: ev
+    });
+  }
 }

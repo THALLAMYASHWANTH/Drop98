@@ -31,6 +31,7 @@ export class OtpPage {
   resetPass() {
     if (this.formData.otp == this.otp) {
       this.navCtrl.pop();
+      this.navCtrl.pop();
     } else {
       this.mymsg = "Invalid OTP";
       this.formData.otp = "";
