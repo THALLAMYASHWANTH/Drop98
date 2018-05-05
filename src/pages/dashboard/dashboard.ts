@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { IonicPage, NavController, NavParams, MenuController, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Nav, MenuController, PopoverController } from 'ionic-angular';
 import { PopoverPageComponent } from "../../components/popover-page/popover-page";
 import { ListPage } from "../list/list";
+import { HelloIonicPage } from "../hello-ionic/hello-ionic";
 
 /**
  * Generated class for the DashboardPage page.
@@ -16,10 +17,8 @@ import { ListPage } from "../list/list";
   templateUrl: "dashboard.html"
 })
 export class DashboardPage {
-  @ViewChild("popoverContent", { read: ElementRef })
-  content: ElementRef;
-  @ViewChild("popoverText", { read: ElementRef })
-  text: ElementRef;
+  @ViewChild(Nav) nav: Nav;
+  rootPage = HelloIonicPage;
   pages: Array<{ title: string; component: any }>;
   constructor(
     public navCtrl: NavController,
@@ -27,20 +26,16 @@ export class DashboardPage {
     public menu: MenuController,
     private popoverCtrl: PopoverController
   ) {
-    this.pages = [{ title: "List", component: ListPage }];
+    this.pages = [{ title: "Hello Ionic", component: HelloIonicPage }, { title: "My First List", component: ListPage }];
   }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad DashboardPage");
   }
-  presentPopover(ev) {
-    let popover = this.popoverCtrl.create(PopoverPageComponent, {
-      contentEle: this.content.nativeElement,
-      textEle: this.text.nativeElement
-    });
-
-    popover.present({
-      ev: ev
-    });
+  openPage(page) {
+    // close the menu when clicking a link from the menu
+    this.menu.close();
+    // navigate to the new page if it is not the current page
+    this.nav.setRoot(page.component);
   }
 }

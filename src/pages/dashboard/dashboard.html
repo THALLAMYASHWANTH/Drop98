@@ -1,42 +1,18 @@
-<ion-header>
-    <ion-menu [content]="content">
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Menu</ion-title>
-          </ion-toolbar>
-        </ion-header>
-      
-        <ion-content>
-          <ion-list>
-            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-              {{p.title}}
-            </button>
-          </ion-list>
-        </ion-content>
-      
-      </ion-menu>
-      
-      <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-      <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
-      
-  <ion-navbar>
-    <ion-title>HOME</ion-title>
-    
-    <ion-buttons end>
-      <button ion-button icon-only (click)="presentPopover($event)">
-        <img src="assets/imgs/user.png" style="padding-right:5px;padding-left:5px;height:30px;width:40px">
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
+<ion-menu [content]="content">
 
-<ion-content #popoverContent padding class="popover-page">
-  <div #popoverText class="text-to-change">
-    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel ipsum in purus mollis dictum eget vitae purus. Nulla
-      ultrices est odio, a maximus velit pretium ac. Donec vel elementum mi. Proin elementum pulvinar neque, in lacinia nibh
-      tempus auctor. Nam sapien velit, commodo ac nibh a, maximus ullamcorper nunc. Integer luctus tortor dignissim, dictum
-      neque at, scelerisque purus. Vivamus nec erat vel magna posuere euismod. Sed ac augue eu tellus tincidunt fermentum
-      eget sit amet nunc. Donec sit amet mi libero. Cras nunc arcu, ultrices nec sapien eu, convallis posuere libero. Pellentesque
-      vulputate lacus eros, at lobortis lorem egestas et. Vestibulum tempus quam in efficitur lobortis. Maecenas consectetur
-      consequat sem pharetra aliquet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-    </div>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Pages</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

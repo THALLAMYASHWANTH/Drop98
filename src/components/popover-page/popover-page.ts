@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NavParams} from 'ionic-angular';
+import { ViewController } from "ionic-angular";
 
 /**
  * Generated class for the PopoverPageComponent component.
@@ -12,10 +13,11 @@ import {NavParams} from 'ionic-angular';
   templateUrl: "popover-page.html"
 })
 export class PopoverPageComponent {
-
+  public viewCtrl: ViewController;
   constructor(private navParams: NavParams) {}
 
-  ngOnInit() {
-
-    }
+  ngOnInit() {}
+  close() {
+    this.viewCtrl.dismiss();
   }
+}
