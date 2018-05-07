@@ -30,8 +30,8 @@ export class PopoverPageComponent {
     this.viewCtrl.dismiss();
   }
   logout() {
-    //this.storage.remove("user");
-    //this.storage.remove("pass");
+   this.storage.remove("user");
+    this.storage.remove("pass");
     const root = this.app.getRootNav();
     root.popToRoot();
     let nav = this.app.getRootNav();

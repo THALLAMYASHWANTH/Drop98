@@ -26,14 +26,14 @@
 
   <ion-item>
     <ion-label floating>Password</ion-label>
-    <ion-input type="password" [(ngModel)]="formData.pass" name="pass" clearInput="true"></ion-input>
+    <ion-input [type]="passtype" [(ngModel)]="formData.pass" name="pass" clearInput="true"></ion-input>
+    <button ion-button clear item-end (click)='showHide()' style="height:20px;">
+      <ion-icon name="eye" style="font-size:20px;"></ion-icon>
+    </button>
   </ion-item>
   <p text-right>
     <button ion-button clear type="button" (click)="goToForgotPass()">Forgot password</button>
   </p>
-  <p>
-    {{deviceObj}}
-    </p>
   <button ion-button block type="submit">Login</button>
 </form>
 
