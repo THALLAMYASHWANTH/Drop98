@@ -4,7 +4,7 @@ import {NavParams, NavController, App} from 'ionic-angular';
 import { ViewController } from "ionic-angular";
 import { Storage } from "@ionic/storage";
 import { WelcomePage } from "../../pages/welcome/welcome";
-
+import { ProfilepagePage } from "../../pages/profilepage/profilepage";
 /**
  * Generated class for the PopoverPageComponent component.
  *
@@ -26,10 +26,16 @@ export class PopoverPageComponent {
   ) {}
 
   ngOnInit() {}
+  profile(){ 
+    this.navCtrl.push(ProfilepagePage);
+  }
   close() {
     this.viewCtrl.dismiss();
   }
   logout() {
+    this.storage.remove("user");
+    this.storage.remove("pass");
+    this.viewCtrl.dismiss();
    this.storage.remove("user");
     this.storage.remove("pass");
     const root = this.app.getRootNav();

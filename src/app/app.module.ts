@@ -5,11 +5,11 @@ import { MyApp } from './app.component';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { LoginPage} from '../pages/login/login';
 import { SignupPage  } from '../pages/signup/signup';
-
+import { ProfilepagePage } from '../pages/profilepage/profilepage';
 import { PopoverPageComponent } from "../components/popover-page/popover-page";
 import { IonicStorageModule } from '@ionic/storage';
 import { Storage } from "@ionic/storage";
-
+import { PasswordPage } from "../pages/password/password";
 import { ForgotPassPage } from "../pages/forgot-pass/forgot-pass";
 import { OtpPage } from "../pages/otp/otp";
 
@@ -38,7 +38,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     OtpPage,
     DashboardPage,
     PopoverPageComponent,
-    HelloIonicPage
+    HelloIonicPage,ProfilepagePage,PasswordPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +48,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
+    AboutPage,PasswordPage,
     ContactPage,
     HomePage,
     TabsPage,
@@ -59,7 +59,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     OtpPage,
     DashboardPage,
     PopoverPageComponent,
-    HelloIonicPage
+    HelloIonicPage,ProfilepagePage
   ],
   providers: [
     StatusBar,
