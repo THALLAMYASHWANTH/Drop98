@@ -21,6 +21,7 @@ export class LoginPage {
 
   public forphone:any;
   public forpass:any;
+  public passtype: string = "password";
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -83,5 +84,15 @@ export class LoginPage {
   // GO TO FORGOT PASSWORD PAGE
   goToForgotPass() {
     this.navCtrl.push(ForgotPassPage);
+  }
+  showHide()
+  {
+    if(this.passtype=="password")
+    {
+      this.passtype="text";
+    }
+    else{
+      this.passtype="password";
+    }
   }
 }
