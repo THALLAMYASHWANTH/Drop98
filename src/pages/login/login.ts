@@ -4,7 +4,7 @@ import { TabsPage } from '../tabs/tabs';
 import { ForgotPassPage } from '../forgot-pass/forgot-pass';
 import { DashboardPage } from '../dashboard/dashboard';
 import { Storage } from "@ionic/storage";
-
+import * as $ from 'jquery';
 import {Observable} from 'rxjs';
 
 
@@ -21,6 +21,7 @@ export class LoginPage {
     public navParams: NavParams,
     private storage: Storage
   ) {
+
     this.formData = {};
   }
 
@@ -31,7 +32,7 @@ export class LoginPage {
   public logincheck(username: any, password: any) {
     let data = { success: 1 };
 
-    if (password !== "password") data.success = 0;
+    if (password !== "password"||username!="1234") data.success = 0;
 
     return Observable.from([data]);
   }
@@ -42,14 +43,15 @@ export class LoginPage {
 
       if (res.success) {
         //securely store
-        this.storage.set("user", this.formData.phone);
-        this.storage.set("pass", this.formData.pass);
+        //this.storage.set("user", this.formData.phone);
+        //this.storage.set("pass", this.formData.pass);
         //thx mike for hack to remove back btn
         this.navCtrl.setRoot(DashboardPage, null, { animate: true });
       } else {
       }
     });
   }
+
 
   // GO TO FORGOT PASSWORD PAGE
   goToForgotPass() {
@@ -64,5 +66,6 @@ export class LoginPage {
     else{
       this.passtype="password";
     }
+    return false;
   }
 }
