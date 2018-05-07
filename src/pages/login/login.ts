@@ -50,8 +50,8 @@ export class LoginPage {
 
       if (res.success) {
         //securely store
-        //this.storage.set("user", this.formData.phone);
-        //this.storage.set("pass", this.formData.pass);
+        this.storage.set("user", this.formData.phone);
+        this.storage.set("pass", this.formData.pass);
         //thx mike for hack to remove back btn
         this.navCtrl.setRoot(DashboardPage, null, { animate: true });
       } else {
@@ -61,8 +61,8 @@ export class LoginPage {
   checklogin(){
     var flag=0,flag2=0;
     var re= /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    var pass1= /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/; 
-    
+    var pass1= /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+
     if(re.test(this.formData.phone)){
       flag=1;
     }
@@ -77,10 +77,10 @@ export class LoginPage {
     if(flag==1&&flag2==1){
       this.msg1="login successfull";
     }
-    
+
   }
-  
-  
+
+
 
 
   // GO TO FORGOT PASSWORD PAGE
