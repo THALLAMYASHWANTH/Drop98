@@ -41,10 +41,14 @@ export class LoginPage {
   public logincheck(username: any, password: any) {
     let data = { success: 0 };
      this.xhttp = new XMLHttpRequest();
+    this.xhttp.timeout=2000;
+    this.xhttp.ontimeout = function () {
+      console.log("ERROR CON");
+    }
     this.xhttp.open(
       "GET",
       "http://www.dbdwater.com/smartmeter_webapp/api/rest/login/getLoginDetails",
-      true
+      false
     );
     this.xhttp.setRequestHeader("Content-type", "application/json");
     this.xhttp.setRequestHeader(
@@ -52,12 +56,23 @@ export class LoginPage {
       "Basic " + btoa(username + ":" + password)
     );
 
+    /* this.xhttp.onreadystatechange = function () {
+      if (this.xhttp.readyState === 4 && this.xhttp.status === 200) {
+        console.log(this.xhttp.responseText);
+      }
+    }; */
 
 
+    this.xhttp.send();
 
-    //var response = JSON.parse(xhr.responseText);
+    console.log(this.xhttp.responseText);
 
-    //if (response.data.authenticated) data.success = 1;
+    var response = JSON.parse(this.xhttp.responseText);
+
+    console.log(response.authenticated);
+
+
+    if (response.authenticated) data.success = 0;
 
 return Observable.from([data]);
 
