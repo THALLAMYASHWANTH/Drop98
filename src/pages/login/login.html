@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <!--
   Generated template for the LoginPage page.
 
@@ -19,8 +20,8 @@
 <form (ngSubmit)="login()">
 
   <ion-item style="background: color(#dbddbd);">
-    <ion-label floating>Phone Number</ion-label>
-    <ion-input type="number" class="form-control" #inputPhone name="phone"  [(ngModel)]="formData.phone"></ion-input>
+    <ion-label floating>ID</ion-label>
+    <ion-input type="text" class="form-control" #inputPhone name="phone"  [(ngModel)]="formData.phone"></ion-input>
 
   </ion-item>
 
@@ -36,7 +37,9 @@
   </p>
   <button ion-button block type="submit">Login</button>
  <h1> {{msg1}}</h1>
- 
-</form>
 
+</form>
+<p>
+  {{xhttp}}
+</p>
 </ion-content>

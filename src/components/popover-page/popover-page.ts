@@ -26,7 +26,7 @@ export class PopoverPageComponent {
   ) {}
 
   ngOnInit() {}
-  profile(){ 
+  profile(){
     this.navCtrl.push(ProfilepagePage);
   }
   close() {
@@ -34,9 +34,6 @@ export class PopoverPageComponent {
   }
   logout() {
     this.storage.remove("user");
-    this.storage.remove("pass");
-    this.viewCtrl.dismiss();
-   this.storage.remove("user");
     this.storage.remove("pass");
     const root = this.app.getRootNav();
     root.popToRoot();
