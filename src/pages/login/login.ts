@@ -47,6 +47,7 @@ export class LoginPage {
     let data = { success: 0 };
 
     this.xhttp = new XMLHttpRequest();
+
     /* this.xhttp.ontimeout = function () {
       console.error("The request  "  + " timed out.");
     }; */
