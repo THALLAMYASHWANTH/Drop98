@@ -51,7 +51,8 @@ export class LoginPage {
       "Authorization",
       "Basic " + btoa(username + ":" + password)
     );
-    console.log(this.xhttp.send().map((res: Response) => res.json));
+
+
 
 
     //var response = JSON.parse(xhr.responseText);
