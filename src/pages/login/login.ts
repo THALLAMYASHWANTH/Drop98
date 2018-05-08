@@ -53,10 +53,12 @@ export class LoginPage {
     }; */
     this.xhttp.open("GET", "http://www.dbdwater.com/smartmeter_webapp/api/rest/login/getLoginDetails", false);
     this.xhttp.setRequestHeader("Content-type", "application/json");
+    this.xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
     this.xhttp.setRequestHeader(
       "Authorization",
       "Basic " + btoa(username + ":" + password)
     );
+
 
     /* this.xhttp.onreadystatechange = function () {
       if (this.xhttp.readyState === 4 && this.xhttp.status === 200) {
@@ -70,6 +72,10 @@ export class LoginPage {
     console.log(this.xhttp.responseText);
 
     var response = JSON.parse(this.xhttp.responseText);
+
+    this.storage.set("email", response.email);
+    this.storage.set("logo", response.logo);
+    this.storage.set("auth", response.authenticated);
 
     console.log(response.authenticated);
 
