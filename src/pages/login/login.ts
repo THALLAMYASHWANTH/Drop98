@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController} from 'ionic-angular';
 import { HttpModule, Http } from "@angular/http";
 import { TabsPage } from '../tabs/tabs';
 import { ForgotPassPage } from '../forgot-pass/forgot-pass';
@@ -20,7 +20,6 @@ export class LoginPage {
   public msg1: any;
   public msg2: any;
   public msg3: any;
-
   public forphone: any;
   public forpass: any;
   public xhttp: any;
@@ -29,7 +28,9 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private storage: Storage,
-    public http: Http
+    public http: Http,
+    public loadingCtrl: LoadingController,
+    private alertCtrl: AlertController
   ) {
     this.formData = {};
   }
@@ -38,18 +39,18 @@ export class LoginPage {
     console.log("ionViewDidLoad LoginPage");
   }
 
+  apicheck()
+  {
+
+  }
   public logincheck(username: any, password: any) {
     let data = { success: 0 };
-     this.xhttp = new XMLHttpRequest();
-    this.xhttp.timeout=2000;
-    this.xhttp.ontimeout = function () {
-      console.log("ERROR CON");
-    }
-    this.xhttp.open(
-      "GET",
-      "http://www.dbdwater.com/smartmeter_webapp/api/rest/login/getLoginDetails",
-      false
-    );
+
+    this.xhttp = new XMLHttpRequest();
+    /* this.xhttp.ontimeout = function () {
+      console.error("The request  "  + " timed out.");
+    }; */
+    this.xhttp.open("GET", "http://www.dbdwater.com/smartmeter_webapp/api/rest/login/getLoginDetails", false);
     this.xhttp.setRequestHeader("Content-type", "application/json");
     this.xhttp.setRequestHeader(
       "Authorization",
@@ -62,7 +63,7 @@ export class LoginPage {
       }
     }; */
 
-
+    //this.xhttp.timeout= 2000;
     this.xhttp.send();
 
     console.log(this.xhttp.responseText);
@@ -71,11 +72,9 @@ export class LoginPage {
 
     console.log(response.authenticated);
 
+    if (response.authenticated) data.success = 1;
 
-    if (response.authenticated) data.success = 0;
-
-return Observable.from([data]);
-
+    return Observable.from([data]);
   }
 
   login() {
