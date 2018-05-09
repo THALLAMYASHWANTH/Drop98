@@ -4,8 +4,6 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <!-- <ion-title>HOME</ion-title> -->
-    <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
-    </ion-searchbar>
     <ion-buttons end>
       <button ion-button icon-only (click)="presentPopover($event)">
         <img src="assets/imgs/user.png" style="padding-right:5px;padding-left:5px;height:30px;width:40px">
@@ -17,25 +15,52 @@
 
 <ion-content padding>
 
-<ion-card>
+<!-- <ion-card>
   <ion-card-header>
     Bar Chart
   </ion-card-header>
   <ion-card-content>
     <canvas #barCanvas></canvas>
   </ion-card-content>
-</ion-card>
+</ion-card> -->
 
 <ion-card>
   <ion-card-header>
-    Doughnut Chart
+    Water Source
   </ion-card-header>
   <ion-card-content>
-    <canvas #doughnutCanvas></canvas>
+    <canvas #wsource></canvas>
   </ion-card-content>
 </ion-card>
 
 <ion-card>
+  <ion-card-header>
+    Drinking Water
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #wdrink></canvas>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    Utility Water
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #wutility></canvas>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    Other Water
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #wother></canvas>
+  </ion-card-content>
+</ion-card>
+
+<!-- <ion-card>
   <ion-card-header>
     Line Chart
   </ion-card-header>
@@ -43,4 +68,4 @@
     <canvas #lineCanvas></canvas>
   </ion-card-content>
 </ion-card>
-</ion-content>
+</ion-content> -->

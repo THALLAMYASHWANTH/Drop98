@@ -1,25 +1,75 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
 import { Chart } from "chart.js";
 import { PopoverPageComponent } from "../../components/popover-page/popover-page";
-import { PopoverController } from 'ionic-angular';
+import { PopoverController, IonicPage } from 'ionic-angular';
 import { NavController } from "ionic-angular";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/observable/from";
+import { Storage } from "@ionic/storage";
+import { Http, HttpModule } from '@angular/http';
+
+
 @Component({
   selector: "page-hello-ionic",
   templateUrl: "hello-ionic.html"
 })
 export class HelloIonicPage {
-  @ViewChild('barCanvas') barCanvas;
-  @ViewChild('doughnutCanvas') doughnutCanvas;
-  @ViewChild('lineCanvas') lineCanvas;
+  //@ViewChild('barCanvas') barCanvas;
+  @ViewChild("wsource") wsourcecanvas;
+  @ViewChild("wdrink") wdrinkcanvas;
+  @ViewChild("wutility") wutilitycanvas;
+  @ViewChild("wother") wothercanvas;
+  //@ViewChild('lineCanvas') lineCanvas;
 
-  barChart: any;
-  doughnutChart: any;
-  lineChart: any;
+  public xhttp: any;
+  getInfo: any;
+  response:any;
+
+  //barChart: any;
+  wsourcechart: any;
+  wdrinkchart: any;
+  wotherchart: any;
+  wutilitychart: any;
+  //lineChart: any;
   @ViewChild("popoverContent", { read: ElementRef })
   content: ElementRef;
   @ViewChild("popoverText", { read: ElementRef })
   text: ElementRef;
-  constructor(private popoverCtrl: PopoverController, public navCtrl: NavController) {}
+  constructor(
+    private popoverCtrl: PopoverController,
+    public navCtrl: NavController,
+    private storage: Storage
+  ) {
+    this.getInfo = {};
+    storage.get("user").then(val => {
+      this.getInfo.name = val;
+    });
+    storage.get("pass").then(val => {
+      this.getInfo.pass = val;
+      console.log(val);
+    });
+    this.xhttp = new XMLHttpRequest();
+    this.xhttp.open(
+      "GET",
+      "http://www.dbdwater.com/smartmeter_webapp/api/rest/meter/get30DayReadings/3000021",
+      false
+    );
+    this.xhttp.setRequestHeader("Content-type", "application/json");
+    /* this.xhttp.setRequestHeader(
+      "Authorization",
+      "Basic " + btoa(this.getInfo.name + ":" + this.getInfo.pass)
+    ); */
+    this.xhttp.setRequestHeader(
+      "Authorization",
+      "Basic " + "c3lzdXNlcjpQYXNzd29yZDEj"
+    );
+    this.xhttp.send();
+
+    console.log(this.xhttp.responseText);
+
+    this.response = JSON.parse(this.xhttp.responseText);
+    console.log(this.response[201802000015]);
+  }
 
   presentPopover(myEvent) {
     let popover = this.popoverCtrl.create(PopoverPageComponent);
@@ -28,110 +78,26 @@ export class HelloIonicPage {
     });
   }
 
-
   ionViewDidLoad() {
-
-    this.barChart = new Chart(this.barCanvas.nativeElement, {
-
-      type: 'bar',
+    this.wsourcechart = new Chart(this.wsourcecanvas.nativeElement, {
+      type: "doughnut",
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-
-    });
-
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-
-      type: 'doughnut',
-      data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56",
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ]
-        }]
-      }
-
-    });
-
-    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-
-      type: 'line',
-      data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["Drinking Water", "Other Water", "Utility Water  "],
         datasets: [
           {
-            label: "My First dataset",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40],
-            spanGaps: false,
+            label: "# of Ltrs",
+            data: [this.response[201802000015][0].numberOfUnits,
+              this.response[201802000015][1].numberOfUnits,
+              this.response[201802000015][2].numberOfUnits],
+            backgroundColor: [
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(255, 159, 64, 0.2)"
+            ],
+            hoverBackgroundColor: ["#36A2EB", "#FF6384", "#FFCE56"]
           }
         ]
       }
-
     });
-
   }
-
 }

@@ -1,4 +1,4 @@
-import { $$iterator } from 'rxjs/symbol/iterator';
+import { iterator } from 'rxjs/symbol/iterator';
 import { Component,ViewChild } from '@angular/core';
 import {NavParams, NavController, App} from 'ionic-angular';
 import { ViewController } from "ionic-angular";
@@ -20,12 +20,17 @@ import { PhotoPage } from '../../pages/photo/photo';
 export class PopoverPageComponent {
   public navCtrl: NavController;
   public viewCtrl: ViewController;
-  public user = "Vishnu";
+  public user = "";
   constructor(
     private navParams: NavParams,
     private storage: Storage,
     public app: App
-  ) {}
+  ) {
+    storage.get('user').then((val) => {
+      this.user = val;
+    });
+
+  }
 
   ngOnInit() {}
   profile(){

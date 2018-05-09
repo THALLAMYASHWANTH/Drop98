@@ -21,11 +21,20 @@ swipe(){
   this.navCtrl.pop();
 }
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
-    this.getInfo.name = this.storage.get("user");
-    this.getInfo.userphoto = this.storage.get("logo");
-    this.getInfo.email = this.storage.get("email");
-    this.getInfo.loggedin = this.storage.get("auth");
-
+    this.getInfo={};
+    storage.get('user').then((val) => {
+      this.getInfo.name = val;
+    });
+    storage.get("logo").then(val => {
+      this.getInfo.userphoto = val;
+      console.log(val);
+    });
+    storage.get("email").then(val => {
+      this.getInfo.email = val;
+    });
+    storage.get("auth").then(val => {
+      this.getInfo.loggedin = val;
+    });
   }
 
   ionViewDidLoad() {

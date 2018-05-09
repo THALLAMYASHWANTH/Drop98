@@ -73,13 +73,14 @@ export class LoginPage {
 
     var response = JSON.parse(this.xhttp.responseText);
 
-    this.storage.set("email", response.email);
-    this.storage.set("logo", response.logo);
-    this.storage.set("auth", response.authenticated);
-
     console.log(response.authenticated);
 
-    if (response.authenticated) data.success = 1;
+    if (response.authenticated){
+      this.storage.set("email", response.email);
+      this.storage.set("logo", response.logo);
+      this.storage.set("auth", response.authenticated);
+       data.success = 1;
+    }
 
     return Observable.from([data]);
   }

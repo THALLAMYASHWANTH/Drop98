@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from "@angular/http";
+import { Http, HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler, PopoverController } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { WelcomePage } from '../pages/welcome/welcome';
@@ -8,8 +8,7 @@ import { LoginPage} from '../pages/login/login';
 import { SignupPage  } from '../pages/signup/signup';
 import { ProfilepagePage } from '../pages/profilepage/profilepage';
 import { PopoverPageComponent } from "../components/popover-page/popover-page";
-import { IonicStorageModule } from '@ionic/storage';
-import { Storage } from "@ionic/storage";
+import { IonicStorageModule } from "@ionic/storage";
 import { PasswordPage } from "../pages/password/password";
 import { ForgotPassPage } from "../pages/forgot-pass/forgot-pass";
 import { OtpPage } from "../pages/otp/otp";
@@ -68,6 +67,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     StatusBar,
     SplashScreen,
     NativeStorage,
+    Storage,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
