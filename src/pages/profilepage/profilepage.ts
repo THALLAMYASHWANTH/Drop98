@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from "@ionic/storage";
 
 /**
  * Generated class for the ProfilepagePage page.
@@ -14,21 +15,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'profilepage.html',
 })
 export class ProfilepagePage {
-   public getInfo={
-    name:'',
-    userphoto:'',
-    email:'',
-    loggedin:false
 
-  }
+  getInfo: any;
 swipe(){
   this.navCtrl.pop();
 }
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.getInfo.name=this.navParams.get('name')
-    this.getInfo.userphoto=this.navParams.get('userphoto')
-    this.getInfo.email=this.navParams.get('email')
-    this.getInfo.loggedin=this.navParams.get('loggedin')  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
+    this.getInfo.name = this.storage.get("user");
+    this.getInfo.userphoto = this.storage.get("logo");
+    this.getInfo.email = this.storage.get("email");
+    this.getInfo.loggedin = this.storage.get("auth");
+
   }
 
   ionViewDidLoad() {
