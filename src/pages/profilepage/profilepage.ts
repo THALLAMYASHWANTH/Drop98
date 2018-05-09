@@ -14,12 +14,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'profilepage.html',
 })
 export class ProfilepagePage {
+   public getInfo={
+    name:'',
+    userphoto:'',
+    email:'',
+    loggedin:false
 
+  }
+swipe(){
+  this.navCtrl.pop();
+}
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.getInfo.name=this.navParams.get('name')
+    this.getInfo.userphoto=this.navParams.get('userphoto')
+    this.getInfo.email=this.navParams.get('email')
+    this.getInfo.loggedin=this.navParams.get('loggedin')  
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilepagePage');
+    console.log(this.getInfo.name+"  "+this.getInfo.userphoto+ "  "+this.getInfo.email+ "  "+this.getInfo.loggedin);
   }
 
 }

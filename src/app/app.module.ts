@@ -13,6 +13,7 @@ import { Storage } from "@ionic/storage";
 import { PasswordPage } from "../pages/password/password";
 import { ForgotPassPage } from "../pages/forgot-pass/forgot-pass";
 import { OtpPage } from "../pages/otp/otp";
+import { PhotoPage } from "../pages/photo/photo";
 
 import { DashboardPage } from "../pages/dashboard/dashboard";
 import { HelloIonicPage } from "../pages/hello-ionic/hello-ionic";
@@ -39,7 +40,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     OtpPage,
     DashboardPage,
     PopoverPageComponent,
-    HelloIonicPage,ProfilepagePage,PasswordPage
+    HelloIonicPage,ProfilepagePage,PasswordPage,PhotoPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +62,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     OtpPage,
     DashboardPage,
     PopoverPageComponent,
-    HelloIonicPage,ProfilepagePage
+    HelloIonicPage,ProfilepagePage,PhotoPage
   ],
   providers: [
     StatusBar,

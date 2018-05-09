@@ -3,15 +3,11 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>HOME</ion-title>
+    <!-- <ion-title>HOME</ion-title> -->
+    <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+    </ion-searchbar>
     <ion-buttons end>
       <button ion-button icon-only (click)="presentPopover($event)">
-          <ion-searchbar
-          [(ngModel)]="myInput"
-          [showCancelButton]="shouldShowCancel"
-          (ionInput)="onInput($event)"
-          (ionCancel)="onCancel($event)"> 
-      </ion-searchbar>
         <img src="assets/imgs/user.png" style="padding-right:5px;padding-left:5px;height:30px;width:40px">
         
       </button>
