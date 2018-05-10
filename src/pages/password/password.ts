@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DashboardPage } from '../dashboard/dashboard';
 
 /**
  * Generated class for the PasswordPage page.
@@ -21,5 +22,7 @@ export class PasswordPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PasswordPage');
   }
-
+  back(){
+    this.navCtrl.push(DashboardPage);
+  }
 }
