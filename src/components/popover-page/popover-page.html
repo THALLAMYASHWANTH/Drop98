@@ -1,7 +1,8 @@
 <ion-list>
   <ion-list-header>{{user}}</ion-list-header>
-  <button ion-item (click)="profile()">My Profile</button>
-  <button ion-item (click)="Passwordp()">Change Password</button>
-  <button ion-item (click)="pic()">Upload Photo</button>
-  <button ion-item (click)="logout()" ng-click="popover.hide()">Logout</button>
+  <button ion-item (click)="profile()">
+      <ion-icon ios="ios-person" md="md-person"></ion-icon>  My Profile</button>
+  <button ion-item (click)="Passwordp()"> <ion-icon ios="ios-settings" md="md-settings"></ion-icon>  Change Password</button>
+  <button ion-item (click)="pic()"> <ion-icon ios="ios-camera" md="md-camera"></ion-icon>  Upload Photo</button>
+  <button ion-item (click)="logout()" ng-click="popover.hide()"><ion-icon ios="ios-key" md="md-key"></ion-icon>  Logout</button>
 </ion-list>

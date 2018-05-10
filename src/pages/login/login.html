@@ -32,6 +32,11 @@
       <ion-icon name="eye" style="font-size:20px;"></ion-icon>
     </button>
   </ion-item>
+  <ion-label>
+          <ion-checkbox name="agree"   [(ngModel)]="formData.agree" checked="true" required></ion-checkbox>
+        
+  I agree <a (click)="openTerms()">Terms and Conditions</a></ion-label>      
+  
   <p text-right>
     <button ion-button clear type="button" (click)="goToForgotPass()">Forgot password</button>
   </p>
