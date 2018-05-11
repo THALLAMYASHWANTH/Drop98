@@ -8,6 +8,8 @@ import { Storage } from "@ionic/storage";
 //import * as $ from 'jquery';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
+import { TermsPage } from '../terms/terms';
+import { Toast } from '@ionic-native/toast';
 
 
 @IonicPage()
@@ -17,6 +19,7 @@ import 'rxjs/add/observable/from';
 })
 export class LoginPage {
   public formData: any;
+  public pass1: string ="password";
   public msg1: any;
   public msg2: any;
   public msg3: any;
@@ -24,16 +27,19 @@ export class LoginPage {
   public forpass: any;
   public xhttp: any;
   public passtype: string = "password";
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private storage: Storage,
+    private toast: Toast,
     public http: Http,
     public loadingCtrl: LoadingController,
     private alertCtrl: AlertController
   ) {
     this.formData = {};
   }
+  
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad LoginPage");
@@ -87,6 +93,8 @@ export class LoginPage {
 
   login() {
     //this.checklogin();
+    if(this.formData.agree){
+      if(this.checklogin()){
     this.logincheck(this.formData.phone, this.formData.pass).subscribe(res => {
       console.log(res);
 
@@ -98,32 +106,42 @@ export class LoginPage {
         this.navCtrl.setRoot(DashboardPage, null, { animate: true });
       } else {
       }
-    });
-  }
+    });}
+  
+}
+else{ 
+  this.msg1="please read terms and conditions";
+}}
   checklogin() {
     var flag = 0,
       flag2 = 0;
-    var re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    var pass1 = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    
 
     if (re.test(this.formData.phone)) {
       flag = 1;
     } else {
       this.msg1 = "please enter valid moblie number or password";
+      return false;
     }
-    if (pass1.test(this.formData.pass)) {
+    if (this.formData.pass==this.pass1) {
       flag2 = 1;
     } else {
       this.msg1 = "please enter valid moblie number or password";
+      return false;
     }
     if (flag == 1 && flag2 == 1) {
       this.msg1 = "login successfull";
+    return true;
     }
   }
 
   // GO TO FORGOT PASSWORD PAGE
   goToForgotPass() {
     this.navCtrl.push(ForgotPassPage);
+  }
+  openTerms(){
+    this.navCtrl.push(TermsPage);
   }
   showHide() {
     if (this.passtype == "password") {

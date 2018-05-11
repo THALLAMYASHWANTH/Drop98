@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
+import { DashboardPage } from '../dashboard/dashboard';
 
 /**
  * Generated class for the ProfilepagePage page.
@@ -17,11 +18,13 @@ import { Storage } from "@ionic/storage";
 export class ProfilepagePage {
 
   getInfo: any;
+  edit: boolean = null;
 swipe(){
   this.navCtrl.pop();
 }
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
     this.getInfo={};
+    this.edit = false;
     storage.get('user').then((val) => {
       this.getInfo.name = val;
     });
@@ -35,10 +38,23 @@ swipe(){
     storage.get("auth").then(val => {
       this.getInfo.loggedin = val;
     });
+
+    
   }
 
   ionViewDidLoad() {
     console.log(this.getInfo.name+"  "+this.getInfo.userphoto+ "  "+this.getInfo.email+ "  "+this.getInfo.loggedin);
   }
 
+  onClicked(toggle){
+    if(this.edit==true){
+    }
+    this.edit = toggle;
+  }
+  onSubmit(formValue: any){
+    console.log(formValue);
+  }
+ backing(){
+   this.navCtrl.push(DashboardPage);
+ }
 }

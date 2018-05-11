@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DashboardPage } from '../dashboard/dashboard';
 
 /**
- * Generated class for the PasswordPage page.
+ * Generated class for the TermsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,18 +10,16 @@ import { DashboardPage } from '../dashboard/dashboard';
 
 @IonicPage()
 @Component({
-  selector: 'page-password',
-  templateUrl: 'password.html',
+  selector: 'page-terms',
+  templateUrl: 'terms.html',
 })
-export class PasswordPage {
+export class TermsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PasswordPage');
+    console.log('ionViewDidLoad TermsPage');
   }
-  back(){
-    this.navCtrl.push(DashboardPage);
-  }
+
 }

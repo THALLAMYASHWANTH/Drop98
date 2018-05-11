@@ -19,14 +19,14 @@ import { HelloIonicPage } from "../hello-ionic/hello-ionic";
 export class DashboardPage {
   @ViewChild(Nav) nav: Nav;
   rootPage = HelloIonicPage;
-  pages: Array<{ title: string; component: any }>;
+  pages: Array<{ icon:string; title: string; component: any }>;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public menu: MenuController,
     private popoverCtrl: PopoverController
   ) {
-    this.pages = [{ title: "Dashboard", component: HelloIonicPage }, { title: "Billing Management", component: ListPage }];
+    this.pages = [{ icon:"home",title: "Dashboard", component: HelloIonicPage }, { icon:"paper",title: "Billing Management", component: ListPage }];
   }
 
   ionViewDidLoad() {
