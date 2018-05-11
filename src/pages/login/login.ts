@@ -9,7 +9,7 @@ import { Storage } from "@ionic/storage";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import { TermsPage } from '../terms/terms';
-import { Toast } from '@ionic-native/toast';
+//import { Toast } from '@ionic-native/toast';
 
 
 @IonicPage()
@@ -32,7 +32,7 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private storage: Storage,
-    private toast: Toast,
+    /* private toast: Toast, */
     public http: Http,
     public loadingCtrl: LoadingController,
     private alertCtrl: AlertController
@@ -85,6 +85,7 @@ export class LoginPage {
       this.storage.set("email", response.email);
       this.storage.set("logo", response.logo);
       this.storage.set("auth", response.authenticated);
+      this.storage.set("custid", response.userId);
        data.success = 1;
     }
 

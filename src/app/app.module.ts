@@ -24,7 +24,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { Toast } from '@ionic-native/toast';
+//import { Toast } from '@ionic-native/toast';
 
 @NgModule({
   declarations: [
@@ -68,7 +68,7 @@ import { Toast } from '@ionic-native/toast';
     StatusBar,
     SplashScreen,
     NativeStorage,
-    Toast,
+    /* Toast, */
     Storage,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
