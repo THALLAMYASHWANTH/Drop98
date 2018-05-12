@@ -7,7 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Profilepage</ion-title>
+    <ion-title>
+      
+       <span class="center">Profile Page</span>
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -49,7 +52,7 @@
             </div>
             <ion-item>
                 <ion-label stacked>User Type *</ion-label>
-                <ion-select id="form_control_privilege" name="privilege" [disabled]="!edit" ng-model="userDetails.privilege" ng-disabled="true" disabled="disabled">
+                <ion-select id="form_control_privilege" name="privilege" [disabled]="!edit" ng-model="getInfo.privilege" ng-disabled="true" disabled="disabled">
                     <ion-option value="SYSTEM">System</ion-option>
                     <ion-option value="GROUP">Group</ion-option>
                     <ion-option value="CUSTOMER" selected>Customer</ion-option>
@@ -59,7 +62,7 @@
               <ion-item>
                   <ion-label stacked>Roles</ion-label>
                   <ion-select  multiple="true" [disabled]="!edit" >
-                    <ion-option selected>Coustomer</ion-option>
+                    <ion-option selected>Customer</ion-option>
                     <ion-option>Group Admin</ion-option>
                     <ion-option>Associate</ion-option>
                   </ion-select>

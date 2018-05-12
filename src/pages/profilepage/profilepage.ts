@@ -38,6 +38,9 @@ swipe(){
     storage.get("auth").then(val => {
       this.getInfo.loggedin = val;
     });
+    storage.get("custtype").then(val => {
+      this.getInfo.privilege = val;
+    });
 
     
   }

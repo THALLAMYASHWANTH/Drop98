@@ -86,6 +86,7 @@ export class LoginPage {
       this.storage.set("logo", response.logo);
       this.storage.set("auth", response.authenticated);
       this.storage.set("custid", response.userId);
+      this.storage.set("custtype", response.roles);
        data.success = 1;
     }
 
