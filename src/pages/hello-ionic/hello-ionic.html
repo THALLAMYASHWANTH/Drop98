@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <img src="../assets/imgs/dash.png">
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <img src="assets/imgs/user.png" style="padding-right:5px;padding-left:5px;height:30px;width:40px">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+<!-- <ion-card>
+  <ion-card-header>
+    Bar Chart
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #barCanvas></canvas>
+  </ion-card-content>
+</ion-card> -->
+
+<ion-card>
+  <ion-card-header>
+    Monthly Usage
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #monthusage></canvas>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    Water Source
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #wsource></canvas>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    Drinking Water
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #wdrink></canvas>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    Utility Water
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #wutility></canvas>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    Other Water
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #wother></canvas>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    Payment Summary
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #paysummary></canvas>
+  </ion-card-content>
+</ion-card>
+
+<div #map>
+</div>
+
+
