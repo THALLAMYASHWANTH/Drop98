@@ -8,6 +8,8 @@ import "rxjs/add/observable/from";
 import { Storage } from "@ionic/storage";
 import { Http, HttpModule } from '@angular/http';
 
+declare var google: any;
+
 
 @Component({
     selector: "page-hello-ionic",
@@ -23,6 +25,7 @@ export class HelloIonicPage {
     @ViewChild("wother") wothercanvas;
     @ViewChild("monthusage") monthusagecanvas;
     @ViewChild("paysummary") paysummarycanvas;
+    @ViewChild('map') mapRef:ElementRef;
     //@ViewChild('lineCanvas') lineCanvas;
 
     public xhttp: any;
@@ -225,6 +228,15 @@ export class HelloIonicPage {
             }
 
         });
-
+        this.DisplayMap();
     }
+    DisplayMap(){
+        const location =new google.maps.LatLng('17.401941','78.471730');
+      
+        const options={
+          center:location,
+          zoom:10
+        };
+         const map=new google.maps.Map(this.mapRef.nativeElement,options);
+        }
 }
