@@ -82,6 +82,7 @@ export class HelloIonicPage {
 
     presentPopover(myEvent) {
         let popover = this.popoverCtrl.create(PopoverPageComponent);
+      //{ myData: this.popoverCtrl.create(PopoverPageComponent)};
         popover.present({
             ev: myEvent
         });
@@ -169,7 +170,7 @@ export class HelloIonicPage {
                 labels: this.monthlabel,
                 datasets: [
                     {
-                        label: "Rupees",
+                        label: "Ltr",
                         fill: false,
                         lineTension: 0.1,
                         backgroundColor: "rgba(75,192,192,0.4)",
@@ -189,7 +190,29 @@ export class HelloIonicPage {
                         pointHitRadius: 10,
                         data: this.monthdata,
                         spanGaps: false,
-                    }
+                    },
+                    {
+                    label: "Ltr",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "rgba(75,192,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: this.monthdata,
+                    spanGaps: false,
+                  }
                 ]
             }
 
@@ -232,7 +255,7 @@ export class HelloIonicPage {
     }
     DisplayMap(){
         const location =new google.maps.LatLng('17.401941','78.471730');
-      
+
         const options={
           center:location,
           zoom:10

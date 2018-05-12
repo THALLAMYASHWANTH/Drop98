@@ -1,6 +1,6 @@
 import { iterator } from 'rxjs/symbol/iterator';
 import { Component,ViewChild } from '@angular/core';
-import {NavParams, NavController, App} from 'ionic-angular';
+import { NavParams, NavController, App, PopoverController } from 'ionic-angular';
 import { ViewController } from "ionic-angular";
 import { Storage } from "@ionic/storage";
 import { WelcomePage } from "../../pages/welcome/welcome";
@@ -24,28 +24,38 @@ export class PopoverPageComponent {
   constructor(
     private navParams: NavParams,
     private storage: Storage,
-    public app: App
+    public app: App,
+
   ) {
-    storage.get('user').then((val) => {
+    storage.get("user").then(val => {
       this.user = val;
     });
-
   }
 
   ngOnInit() {}
-  profile(){
+  profile() {
     const root = this.app.getRootNav();
     root.popToRoot();
     let nav = this.app.getRootNav();
     nav.setRoot(ProfilepagePage);
   }
-  passwordp()
-  {
+  passwordp() {
+    /*let popover = this.popoverCtrl.create(PopoverPageComponent);
+    //let popover = this.navParams.get("myData");
+    console.log("popover " + popover);
+
+       popover.dismiss();*/
+
+
+
     const root = this.app.getRootNav();
+    console.log("root " + root);
+    root.dismiss();
     root.popToRoot();
+    //let popMenuRoot = this.app.getR();
+    //console.log("popMenuRoot " + popMenuRoot);
     let nav = this.app.getRootNav();
     nav.setRoot(PasswordPage);
-
   }
   pic() {
     const root = this.app.getRootNav();
