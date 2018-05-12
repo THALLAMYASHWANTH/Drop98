@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DashboardPage } from '../dashboard/dashboard';
 
 /**
  * Generated class for the PhotoPage page.
@@ -16,6 +17,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class PhotoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+  backfrompic(){
+    this.navCtrl.push(DashboardPage);
   }
 
   ionViewDidLoad() {

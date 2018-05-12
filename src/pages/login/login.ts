@@ -9,6 +9,10 @@ import { Storage } from "@ionic/storage";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import { TermsPage } from '../terms/terms';
+import { DbadminPage } from '../dbadmin/dbadmin';
+import { GroupPage } from '../group/group';
+import { IfStmt } from '@angular/compiler';
+
 //import { Toast } from '@ionic-native/toast';
 
 
@@ -19,6 +23,7 @@ import { TermsPage } from '../terms/terms';
 })
 export class LoginPage {
   public formData: any;
+  rootPage:any=null;
   public pass1: string ="password";
   public msg1: any;
   public msg2: any;
@@ -86,6 +91,7 @@ export class LoginPage {
       this.storage.set("logo", response.logo);
       this.storage.set("auth", response.authenticated);
       this.storage.set("custid", response.userId);
+      this.storage.set("custtype", response.roles);
        data.success = 1;
     }
 
@@ -104,9 +110,21 @@ export class LoginPage {
         this.storage.set("user", this.formData.phone);
         this.storage.set("pass", this.formData.pass);
         //thx mike for hack to remove back btn
-        this.navCtrl.setRoot(DashboardPage, null, { animate: true });
-      } else {
-      }
+        this.storage.get("custtype").then(resp => {
+          if (resp[0] == "CUSTOMER") {
+            console.log(resp[0]);
+            this.navCtrl.setRoot(DashboardPage, null, { animate: true });
+          }
+          else if(resp[0] == "SYSTEM")
+          {
+            this.navCtrl.setRoot(DbadminPage, null, { animate: true });
+          }
+          else
+          {
+            this.navCtrl.setRoot(GroupPage, null, { animate: true });
+          }
+        });
+      } 
     });}
   
 }

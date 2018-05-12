@@ -6,7 +6,8 @@ import { Storage } from "@ionic/storage";
 import { WelcomePage } from '../pages/welcome/welcome';
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { DashboardPage } from "../pages/dashboard/dashboard";
-
+import { DbadminPage } from "../pages/dbadmin/dbadmin";
+import {GroupPage } from "../pages/group/group";
 @Component({
   templateUrl: "app.html"
 })
@@ -24,7 +25,7 @@ export class MyApp {
       this.storage.get("user").then(resp => {
         if (resp !== null) {
           console.log(resp);
-          this.rootPage=DashboardPage;
+          this.rootPage=GroupPage;
         }
         else
         {

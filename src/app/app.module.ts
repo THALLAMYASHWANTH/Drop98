@@ -20,21 +20,21 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-
+import { DbadminPage } from '../pages/dbadmin/dbadmin';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
 //import { Toast } from '@ionic-native/toast';
-
+import{GroupPage} from '../pages/group/group';
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
+    TabsPage,DbadminPage,
     LoginPage,
-    WelcomePage,
+    WelcomePage,GroupPage,
     SignupPage,
     ForgotPassPage,
     OtpPage,TermsPage,
@@ -52,9 +52,9 @@ import { NativeStorage } from '@ionic-native/native-storage';
   entryComponents: [
     MyApp,
     AboutPage,PasswordPage,
-    ContactPage,
+    ContactPage,GroupPage,
     HomePage,
-    TabsPage,
+    TabsPage,DbadminPage,
     LoginPage,
     WelcomePage,TermsPage,
     SignupPage,
