@@ -27,6 +27,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { InvoicePage } from '../pages/invoice/invoice'; //import { Toast } from '@ionic-native/toast';
 import{GroupPage} from '../pages/group/group';
 import { CustomerdetailsPage } from "../pages/customerdetails/customerdetails";
+import { RemoteServiceProvider } from "../providers/remote-service/remote-service";
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [
     MyApp,
@@ -48,8 +50,8 @@ import { CustomerdetailsPage } from "../pages/customerdetails/customerdetails";
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
-  ],
+    IonicStorageModule.forRoot(),
+  HttpModule, HttpClientModule],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -73,7 +75,8 @@ import { CustomerdetailsPage } from "../pages/customerdetails/customerdetails";
     NativeStorage,
     /* Toast, */
     Storage,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    RemoteServiceProvider
   ]
 })
 export class AppModule {}

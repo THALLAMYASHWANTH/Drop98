@@ -7,6 +7,8 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/from";
 import { Storage } from "@ionic/storage";
 import { Http, HttpModule } from '@angular/http';
+import { RemoteServiceProvider } from "./../../providers/remote-service/remote-service";
+
 
 declare var google: any;
 
@@ -16,8 +18,9 @@ declare var google: any;
     templateUrl: "hello-ionic.html"
 })
 export class HelloIonicPage {
-    monthlabel: any=[];
-    monthdata: any=[];
+  postList: any;
+    monthlabel=[];
+    monthdata =[];
     //@ViewChild('barCanvas') barCanvas;
     @ViewChild("wsource") wsourcecanvas;
     @ViewChild("wdrink") wdrinkcanvas;
@@ -47,38 +50,91 @@ export class HelloIonicPage {
     constructor(
         private popoverCtrl: PopoverController,
         public navCtrl: NavController,
-        private storage: Storage
+        private storage: Storage,
+      private remoteService: RemoteServiceProvider
     ) {
-        this.getInfo = {};
-        storage.get("user").then(val => {
-            this.getInfo.name = val;
-        });
-        storage.get("pass").then(val => {
-            this.getInfo.pass = val;
-            console.log(val);
-        });
-        this.xhttp = new XMLHttpRequest();
-        this.xhttp.open(
-            "GET",
-            "http://www.dbdwater.com/smartmeter_webapp/api/rest/meter/get30DayReadings/3000021",
-            false
-        );
-        this.xhttp.setRequestHeader("Content-type", "application/json");
-        /* this.xhttp.setRequestHeader(
-          "Authorization",
-          "Basic " + btoa(this.getInfo.name + ":" + this.getInfo.pass)
-        ); */
-        this.xhttp.setRequestHeader(
-            "Authorization",
-            "Basic " + "c3lzdXNlcjpQYXNzd29yZDEj"
-        );
-        this.xhttp.send();
+      this.getpaysummary();
+  }
+  getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+  getpaysummary()
+  {
+    this.getInfo = {};
+    this.storage.get("token").then(val => {
+      let token = val;
+      this.storage.get("custid").then(val => {
+          let url = "http://www.dbdwater.com/smartmeter_webapp/api/rest/meter/get30DayReadings/" + val;
 
-        console.log(this.xhttp.responseText);
 
-        this.response = JSON.parse(this.xhttp.responseText);
-        console.log(this.response[201802000015]);
-    }
+          this.remoteService.getPosts(url, token).subscribe((data) => {
+            this.response = data;
+            //console.log(data);
+            let chartdata = [];
+            for (var key in data) {
+              if (data.hasOwnProperty(key)) {
+                //console.log(key, data[key]);
+                let color=this.getRandomColor();
+                let dataset = {
+                  label:key,
+                  fill: false,
+                  lineTension: 0.1,
+                  backgroundColor: color,
+                  borderColor: color,
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: color,
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: color,
+                  pointHoverBorderColor: color,
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                  data: [],
+                  spanGaps: false,
+                }
+                let tempdata = [];
+                this.monthlabel=[];
+                for (var k in data[key]) {
+                  //console.log(data[key][k]);
+                  this.monthlabel.push(data[key][k].incomingDate);
+                  tempdata.push(data[key][k].numberOfUnits);
+                }
+                dataset.data = tempdata;
+                chartdata.push(dataset);
+                //console.log(dataset);
+              }
+            }
+            this.monthdata = chartdata;
+            console.log(this.monthdata);
+
+
+
+            this.monthusagechart = new Chart(this.monthusagecanvas.nativeElement, {
+
+              type: 'line',
+              data: {
+                labels: this.monthlabel,
+                datasets: this.monthdata
+              }
+
+            });
+
+
+        });
+      });
+    });
+
+  }
 
     presentPopover(myEvent) {
         let popover = this.popoverCtrl.create(PopoverPageComponent);
@@ -86,9 +142,11 @@ export class HelloIonicPage {
         popover.present({
             ev: myEvent
         });
+
     }
 
     ionViewDidLoad() {
+
         this.wsourcechart = new Chart(this.wsourcecanvas.nativeElement, {
             type: "doughnut",
             data: {
@@ -97,9 +155,7 @@ export class HelloIonicPage {
                     {
                         label: "# of Ltrs",
                         data: [
-                            this.response[201802000015][0].numberOfUnits,
-                            this.response[201802000015][1].numberOfUnits,
-                            this.response[201802000015][2].numberOfUnits
+                            3000,4000,5000
                         ],
                         backgroundColor: [
                             "rgba(54, 162, 235, 0.2)",
@@ -119,7 +175,7 @@ export class HelloIonicPage {
                 datasets: [
                     {
                         label: "# of Ltrs",
-                        data: [this.response[201802000015][0].numberOfUnits],
+                        data: [3000],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)"],
                         hoverBackgroundColor: ["#36A2EB"]
                     }
@@ -134,7 +190,7 @@ export class HelloIonicPage {
                 datasets: [
                     {
                         label: "# of Ltrs",
-                        data: [this.response[201802000015][1].numberOfUnits],
+                        data: [4000],
                         backgroundColor: ["rgba(255, 159, 64, 0.2)"],
                         hoverBackgroundColor: ["#FFCE56"]
                     }
@@ -149,7 +205,7 @@ export class HelloIonicPage {
                 datasets: [
                     {
                         label: "# of Ltrs",
-                        data: [this.response[201802000015][2].numberOfUnits],
+                        data: [5000],
                         backgroundColor: ["rgba(75, 192, 192, 0.2)"],
                         hoverBackgroundColor: ["#FF6384"]
                     }
@@ -157,66 +213,13 @@ export class HelloIonicPage {
             }
         });
 
-        for (var i = 0; i < this.response[201802000015].length; i++) {
+        /* for (var i = 0; i < this.response[201802000015].length; i++) {
             this.monthdata.push(this.response[201802000015][i].numberOfUnits);
             this.monthlabel.push(this.response[201802000015][i].incomingDate);
 
-        }
+        } */
 
-        this.monthusagechart = new Chart(this.monthusagecanvas.nativeElement, {
 
-            type: 'line',
-            data: {
-                labels: this.monthlabel,
-                datasets: [
-                    {
-                        label: "Ltr",
-                        fill: false,
-                        lineTension: 0.1,
-                        backgroundColor: "rgba(75,192,192,0.4)",
-                        borderColor: "rgba(75,192,192,1)",
-                        borderCapStyle: 'butt',
-                        borderDash: [],
-                        borderDashOffset: 0.0,
-                        borderJoinStyle: 'miter',
-                        pointBorderColor: "rgba(75,192,192,1)",
-                        pointBackgroundColor: "#fff",
-                        pointBorderWidth: 1,
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                        pointHoverBorderColor: "rgba(220,220,220,1)",
-                        pointHoverBorderWidth: 2,
-                        pointRadius: 1,
-                        pointHitRadius: 10,
-                        data: this.monthdata,
-                        spanGaps: false,
-                    },
-                    {
-                    label: "Ltr",
-                    fill: false,
-                    lineTension: 0.1,
-                    backgroundColor: "rgba(75,192,192,0.4)",
-                    borderColor: "rgba(75,192,192,1)",
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderJoinStyle: 'miter',
-                    pointBorderColor: "rgba(75,192,192,1)",
-                    pointBackgroundColor: "#fff",
-                    pointBorderWidth: 1,
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                    pointHoverBorderColor: "rgba(220,220,220,1)",
-                    pointHoverBorderWidth: 2,
-                    pointRadius: 1,
-                    pointHitRadius: 10,
-                    data: this.monthdata,
-                    spanGaps: false,
-                  }
-                ]
-            }
-
-        });
 
 
         this.paysummarychart = new Chart(this.paysummarycanvas.nativeElement, {

@@ -69,22 +69,9 @@ export class LoginPage {
       "Authorization",
       "Basic " + btoa(username + ":" + password)
     );
-
-
-    /* this.xhttp.onreadystatechange = function () {
-      if (this.xhttp.readyState === 4 && this.xhttp.status === 200) {
-        console.log(this.xhttp.responseText);
-      }
-    }; */
-
-    //this.xhttp.timeout= 2000;
     this.xhttp.send();
 
-    console.log(this.xhttp.responseText);
-
     var response = JSON.parse(this.xhttp.responseText);
-
-    console.log(response.authenticated);
 
     if (response.authenticated){
       this.storage.set("email", response.email);
@@ -92,6 +79,7 @@ export class LoginPage {
       this.storage.set("auth", response.authenticated);
       this.storage.set("custid", response.customerId);
       this.storage.set("custtype", response.roles);
+      this.storage.set("token", btoa(username + ":" + password));
        data.success = 1;
     }
 
