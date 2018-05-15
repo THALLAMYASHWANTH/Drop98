@@ -12,6 +12,7 @@ import { TermsPage } from '../terms/terms';
 import { DbadminPage } from '../dbadmin/dbadmin';
 import { GroupPage } from '../group/group';
 import { IfStmt } from '@angular/compiler';
+import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 
 //import { Toast } from '@ionic-native/toast';
 
@@ -40,7 +41,8 @@ export class LoginPage {
     /* private toast: Toast, */
     public http: Http,
     public loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private remoteService: RemoteServiceProvider
   ) {
     this.formData = {};
   }
@@ -57,63 +59,66 @@ export class LoginPage {
   public logincheck(username: any, password: any) {
     let data = { success: 0 };
 
-    this.xhttp = new XMLHttpRequest();
+    // this.xhttp = new XMLHttpRequest();
 
-    /* this.xhttp.ontimeout = function () {
-      console.error("The request  "  + " timed out.");
-    }; */
-    this.xhttp.open("GET", "http://www.dbdwater.com/smartmeter_webapp/api/rest/login/getLoginDetails", false);
-    this.xhttp.setRequestHeader("Content-type", "application/json");
-    this.xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
-    this.xhttp.setRequestHeader(
-      "Authorization",
-      "Basic " + btoa(username + ":" + password)
-    );
-    this.xhttp.send();
+    // /* this.xhttp.ontimeout = function () {
+    //   console.error("The request  "  + " timed out.");
+    // }; */
+    // this.xhttp.open("GET", "http://www.dbdwater.com/smartmeter_webapp/api/rest/login/getLoginDetails", false);
+    // this.xhttp.setRequestHeader("Content-type", "application/json");
+    // this.xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    // this.xhttp.setRequestHeader(
+    //   "Authorization",
+    //   "Basic " + btoa(username + ":" + password)
+    // );
+    // this.xhttp.send();
 
-    var response = JSON.parse(this.xhttp.responseText);
 
-    if (response.authenticated){
-      this.storage.set("email", response.email);
-      this.storage.set("logo", response.logo);
-      this.storage.set("auth", response.authenticated);
-      this.storage.set("custid", response.customerId);
-      this.storage.set("custtype", response.roles);
-      this.storage.set("token", btoa(username + ":" + password));
-       data.success = 1;
-    }
 
-    return Observable.from([data]);
   }
 
   login() {
     //this.checklogin();
     if(this.formData.agree){
-      if(this.checklogin()){
-    this.logincheck(this.formData.phone, this.formData.pass).subscribe(res => {
-      console.log(res);
+      if (this.checklogin()){
+        let token=btoa(this.formData.phone + ":" + this.formData.pass);
+        this.remoteService
+          .getPosts(
+            "http://www.dbdwater.com/smartmeter_webapp/api/rest/login/getLoginDetails",
+            token
+          )
+          .subscribe(data => {
+            console.log(data);
+            var response = data;
+            if (response.authenticated) {
+              this.storage.set("email", response.email);
+              this.storage.set("logo", response.logo);
+              this.storage.set("auth", response.authenticated);
+              this.storage.set("custid", response.customerId);
+              this.storage.set("custtype", response.roles);
+              this.storage.set("token", token);
+              this.storage.set("user", this.formData.phone);
+              this.storage.set("pass", this.formData.pass);
+              //thx mike for hack to remove back btn
+              this.storage.get("custtype").then(resp => {
+                if (resp[0] == "CUSTOMER") {
+                  console.log(resp[0]);
+                  this.navCtrl.setRoot(DashboardPage, null, { animate: true });
+                }
+                else if (resp[0] == "SYSTEM") {
+                  this.navCtrl.setRoot(DbadminPage, null, { animate: true });
+                }
+                else {
+                  this.navCtrl.setRoot(GroupPage, null, { animate: true });
+                }
+              });
+            }
+            else {
 
-      if (res.success) {
-        //securely store
-        this.storage.set("user", this.formData.phone);
-        this.storage.set("pass", this.formData.pass);
-        //thx mike for hack to remove back btn
-        this.storage.get("custtype").then(resp => {
-          if (resp[0] == "CUSTOMER") {
-            console.log(resp[0]);
-            this.navCtrl.setRoot(DashboardPage, null, { animate: true });
-          }
-          else if(resp[0] == "SYSTEM")
-          {
-            this.navCtrl.setRoot(DbadminPage, null, { animate: true });
-          }
-          else
-          {
-            this.navCtrl.setRoot(GroupPage, null, { animate: true });
-          }
-        });
-      }
-    });}
+            }
+
+          });
+        }
 
 }
 else{
