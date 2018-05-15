@@ -25,7 +25,7 @@ export class PopoverPageComponent {
     private navParams: NavParams,
     private storage: Storage,
     public app: App,
-
+    public viewCtrls: ViewController,
   ) {
     storage.get("user").then(val => {
       this.user = val;
@@ -34,6 +34,7 @@ export class PopoverPageComponent {
 
   ngOnInit() {}
   profile() {
+    this.viewCtrls.dismiss();
     const root = this.app.getRootNav();
     root.popToRoot();
     let nav = this.app.getRootNav();
@@ -45,19 +46,19 @@ export class PopoverPageComponent {
     console.log("popover " + popover);
 
        popover.dismiss();*/
-
-
-
+    this.viewCtrls.dismiss();
     const root = this.app.getRootNav();
-    console.log("root " + root);
-    root.dismiss();
+    //console.log("root " + root);
+   // root.dismiss();
     root.popToRoot();
+
     //let popMenuRoot = this.app.getR();
     //console.log("popMenuRoot " + popMenuRoot);
     let nav = this.app.getRootNav();
     nav.setRoot(PasswordPage);
   }
   pic() {
+    this.viewCtrls.dismiss();
     const root = this.app.getRootNav();
     root.popToRoot();
     let nav = this.app.getRootNav();
@@ -66,6 +67,7 @@ export class PopoverPageComponent {
   logout() {
     this.storage.remove("user");
     this.storage.remove("pass");
+    this.viewCtrls.dismiss();
     const root = this.app.getRootNav();
     root.popToRoot();
     let nav = this.app.getRootNav();

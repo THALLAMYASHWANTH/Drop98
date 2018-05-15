@@ -26,6 +26,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
 //import { Toast } from '@ionic-native/toast';
 import{GroupPage} from '../pages/group/group';
+import { RemoteServiceProvider } from "../providers/remote-service/remote-service";
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [
     MyApp,
@@ -46,8 +48,8 @@ import{GroupPage} from '../pages/group/group';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
-  ],
+    IonicStorageModule.forRoot(),
+  HttpModule, HttpClientModule],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -70,7 +72,8 @@ import{GroupPage} from '../pages/group/group';
     NativeStorage,
     /* Toast, */
     Storage,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    RemoteServiceProvider
   ]
 })
 export class AppModule {}
