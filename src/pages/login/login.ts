@@ -115,14 +115,14 @@ export class LoginPage {
             console.log(resp[0]);
             this.navCtrl.setRoot(DashboardPage, null, { animate: true });
           }
-          else if(resp[0] == "SYSTEM")
+        /*  else if(resp[0] == "SYSTEM")
           {
             this.navCtrl.setRoot(DbadminPage, null, { animate: true });
           }
           else
           {
             this.navCtrl.setRoot(GroupPage, null, { animate: true });
-          }
+          }*/
         });
       }
     });}

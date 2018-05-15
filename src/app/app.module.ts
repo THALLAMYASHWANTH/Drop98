@@ -24,8 +24,9 @@ import { DbadminPage } from '../pages/dbadmin/dbadmin';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
-//import { Toast } from '@ionic-native/toast';
+import { InvoicePage } from '../pages/invoice/invoice'; //import { Toast } from '@ionic-native/toast';
 import{GroupPage} from '../pages/group/group';
+import { CustomerdetailsPage } from "../pages/customerdetails/customerdetails";
 @NgModule({
   declarations: [
     MyApp,
@@ -40,7 +41,8 @@ import{GroupPage} from '../pages/group/group';
     OtpPage,TermsPage,
     DashboardPage,
     PopoverPageComponent,
-    HelloIonicPage,ProfilepagePage,PasswordPage,PhotoPage
+    HelloIonicPage,ProfilepagePage,PasswordPage,PhotoPage,InvoicePage,
+    CustomerdetailsPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import{GroupPage} from '../pages/group/group';
     OtpPage,
     DashboardPage,
     PopoverPageComponent,
-    HelloIonicPage,ProfilepagePage,PhotoPage
+    HelloIonicPage,ProfilepagePage,PhotoPage,InvoicePage,CustomerdetailsPage
+    
   ],
   providers: [
     StatusBar,

@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, Nav, MenuController, PopoverContro
 import { PopoverPageComponent } from "../../components/popover-page/popover-page";
 import { ListPage } from "../list/list";
 import { HelloIonicPage } from "../hello-ionic/hello-ionic";
+import { InvoicePage } from "../invoice/invoice";
+import { CustomerdetailsPage } from "../customerdetails/customerdetails";
 
 /**
  * Generated class for the DashboardPage page.
@@ -26,7 +28,7 @@ export class DashboardPage {
     public menu: MenuController,
     private popoverCtrl: PopoverController
   ) {
-    this.pages = [{ icon:"home",title: "Dashboard", component: HelloIonicPage }, { icon:"paper",title: "Billing Management", component: ListPage }];
+    this.pages = [{ icon:"home",title: "Dashboard", component: HelloIonicPage }, { icon:"paper",title: "Billing Management", component: InvoicePage },{icon:"sai",title: "Customer management", component: CustomerdetailsPage }];
   }
 
   ionViewDidLoad() {
