@@ -18,6 +18,8 @@ declare var google: any;
     templateUrl: "hello-ionic.html"
 })
 export class HelloIonicPage {
+  totalusage=0;
+  otherwater=[];
   postList: any;
     monthlabel=[];
     monthdata =[];
@@ -34,7 +36,8 @@ export class HelloIonicPage {
     public xhttp: any;
     getInfo: any;
     response: any;
-
+    utilwater=[];
+    drinkwater=[];
     //barChart: any;
     wsourcechart: any;
     wdrinkchart: any;
@@ -47,6 +50,7 @@ export class HelloIonicPage {
     content: ElementRef;
     @ViewChild("popoverText", { read: ElementRef })
     text: ElementRef;
+
     constructor(
         private popoverCtrl: PopoverController,
         public navCtrl: NavController,
@@ -54,6 +58,7 @@ export class HelloIonicPage {
       private remoteService: RemoteServiceProvider
     ) {
       this.getpaysummary();
+      this.getmeterstatus();
   }
   getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -74,7 +79,7 @@ export class HelloIonicPage {
 
           this.remoteService.getPosts(url, token).subscribe((data) => {
             this.response = data;
-            //console.log(data);
+            console.log(data);
             let chartdata = [];
             for (var key in data) {
               if (data.hasOwnProperty(key)) {
@@ -115,7 +120,7 @@ export class HelloIonicPage {
               }
             }
             this.monthdata = chartdata;
-            console.log(this.monthdata);
+            //console.log(this.monthdata);
 
 
 
@@ -136,6 +141,111 @@ export class HelloIonicPage {
 
   }
 
+
+  getmeterstatus()
+  {
+    this.storage.get("token").then(val => {
+      let token = val;
+      this.storage.get("custid").then(val => {
+        let url = "http://www.dbdwater.com/smartmeter_webapp/api/rest/meter/getMeterStatus/" + val;
+        this.remoteService.getPosts(url, token).subscribe((data) => {
+          this.response = data;
+          console.log(data);
+          for (var k in data)
+          {
+            if (k =="Utility Water$Ltr")
+            {
+              for(let y in data[k][0])
+              {
+                this.utilwater.push(data[k][0][y]);
+              }
+
+            }
+            else if (k == "Drinking Water$Ltr") {
+                   for (let y in data[k][0]) {
+                     this.drinkwater.push(data[k][0][y]);
+                   }
+                 }
+            else {
+              for (let y in data[k][0]) {
+                this.otherwater.push(data[k][0][y]);
+              }
+            }
+          }
+          console.log(this.drinkwater[7],this.utilwater[7]);
+
+
+          this.wsourcechart = new Chart(this.wsourcecanvas.nativeElement, {
+            type: "doughnut",
+            data: {
+              labels: ["Drinking Water", "Other Water", "Utility Water  "],
+              datasets: [
+                {
+                  label: "# of Ltrs",
+                  data: [
+                    this.drinkwater[7], this.otherwater[7], this.utilwater[7]
+                  ],
+                  backgroundColor: [
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(255, 159, 64, 0.2)"
+                  ],
+                  hoverBackgroundColor: ["#36A2EB", "#FF6384", "#FFCE56"]
+                }
+              ]
+            }
+          });
+
+          this.wdrinkchart = new Chart(this.wdrinkcanvas.nativeElement, {
+            type: "doughnut",
+            data: {
+              labels: ["Drinking Water"],
+              datasets: [
+                {
+                  label: "# of Ltrs",
+                  data: [this.drinkwater[7]],
+                  backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+                  hoverBackgroundColor: ["#36A2EB"]
+                }
+              ]
+            }
+          });
+
+          this.wutilitychart = new Chart(this.wutilitycanvas.nativeElement, {
+            type: "doughnut",
+            data: {
+              labels: ["Utility Water"],
+              datasets: [
+                {
+                  label: "# of Ltrs",
+                  data: [this.utilwater[7]],
+                  backgroundColor: ["rgba(255, 159, 64, 0.2)"],
+                  hoverBackgroundColor: ["#FFCE56"]
+                }
+              ]
+            }
+          });
+
+          this.wotherchart = new Chart(this.wothercanvas.nativeElement, {
+            type: "doughnut",
+            data: {
+              labels: ["Other Water"],
+              datasets: [
+                {
+                  label: "# of Ltrs",
+                  data: [this.otherwater[7]],
+                  backgroundColor: ["rgba(75, 192, 192, 0.2)"],
+                  hoverBackgroundColor: ["#FF6384"]
+                }
+              ]
+            }
+          });
+          this.totalusage=0+this.otherwater[7] + this.drinkwater[7] + this.utilwater[7]
+
+        });
+      });
+    });
+  }
     presentPopover(myEvent) {
         let popover = this.popoverCtrl.create(PopoverPageComponent);
       //{ myData: this.popoverCtrl.create(PopoverPageComponent)};
@@ -146,82 +256,6 @@ export class HelloIonicPage {
     }
 
     ionViewDidLoad() {
-
-        this.wsourcechart = new Chart(this.wsourcecanvas.nativeElement, {
-            type: "doughnut",
-            data: {
-                labels: ["Drinking Water", "Other Water", "Utility Water  "],
-                datasets: [
-                    {
-                        label: "# of Ltrs",
-                        data: [
-                            3000,4000,5000
-                        ],
-                        backgroundColor: [
-                            "rgba(54, 162, 235, 0.2)",
-                            "rgba(75, 192, 192, 0.2)",
-                            "rgba(255, 159, 64, 0.2)"
-                        ],
-                        hoverBackgroundColor: ["#36A2EB", "#FF6384", "#FFCE56"]
-                    }
-                ]
-            }
-        });
-
-        this.wdrinkchart = new Chart(this.wdrinkcanvas.nativeElement, {
-            type: "doughnut",
-            data: {
-                labels: ["Drinking Water"],
-                datasets: [
-                    {
-                        label: "# of Ltrs",
-                        data: [3000],
-                        backgroundColor: ["rgba(54, 162, 235, 0.2)"],
-                        hoverBackgroundColor: ["#36A2EB"]
-                    }
-                ]
-            }
-        });
-
-        this.wutilitychart = new Chart(this.wutilitycanvas.nativeElement, {
-            type: "doughnut",
-            data: {
-                labels: ["Utility Water"],
-                datasets: [
-                    {
-                        label: "# of Ltrs",
-                        data: [4000],
-                        backgroundColor: ["rgba(255, 159, 64, 0.2)"],
-                        hoverBackgroundColor: ["#FFCE56"]
-                    }
-                ]
-            }
-        });
-
-        this.wotherchart = new Chart(this.wothercanvas.nativeElement, {
-            type: "doughnut",
-            data: {
-                labels: ["Other Water"],
-                datasets: [
-                    {
-                        label: "# of Ltrs",
-                        data: [5000],
-                        backgroundColor: ["rgba(75, 192, 192, 0.2)"],
-                        hoverBackgroundColor: ["#FF6384"]
-                    }
-                ]
-            }
-        });
-
-        /* for (var i = 0; i < this.response[201802000015].length; i++) {
-            this.monthdata.push(this.response[201802000015][i].numberOfUnits);
-            this.monthlabel.push(this.response[201802000015][i].incomingDate);
-
-        } */
-
-
-
-
         this.paysummarychart = new Chart(this.paysummarycanvas.nativeElement, {
 
             type: 'line',
