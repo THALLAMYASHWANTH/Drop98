@@ -21,14 +21,16 @@ import { CustomerdetailsPage } from "../customerdetails/customerdetails";
 export class DashboardPage {
   @ViewChild(Nav) nav: Nav;
   rootPage = HelloIonicPage;
-  pages: Array<{ icon:string; title: string; component: any }>;
+  pages: Array<{ icon:string;title: string; component: any }>;
+  icons: Array<{ icon:any }>;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public menu: MenuController,
     private popoverCtrl: PopoverController
   ) {
-    this.pages = [{ icon:"home",title: "Dashboard", component: HelloIonicPage }, { icon:"paper",title: "Billing Management", component: InvoicePage },{icon:"sai",title: "Customer management", component: CustomerdetailsPage }];
+    this.pages = [{icon:"home",title: "Dashboard", component: HelloIonicPage }, {icon:"paper", title: "Billing Management", component: InvoicePage },{ icon:"person",title: "Customer Management", component: CustomerdetailsPage }];
+  
   }
 
   ionViewDidLoad() {
