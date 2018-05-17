@@ -22,13 +22,19 @@ export class MyApp {
 ) {
     platform.ready().then(() => {
       let that = this;
-      this.storage.get("user").then(resp => {
+      this.storage.get("custtype").then(resp => {
         if (resp !== null) {
-          console.log(resp);
-          this.rootPage=GroupPage;
-        }
-        else
-        {
+          if (resp == "CUSTOMER") {
+            console.log(resp);
+            this.rootPage = DashboardPage;
+          }
+          else if (resp == "SYSTEM") {
+            this.rootPage = DbadminPage;
+          }
+          else {
+            this.rootPage = GroupPage;
+          }
+        } else {
           this.rootPage = WelcomePage;
         }
       });

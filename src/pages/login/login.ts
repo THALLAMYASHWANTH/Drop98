@@ -52,31 +52,6 @@ export class LoginPage {
     console.log("ionViewDidLoad LoginPage");
   }
 
-  apicheck()
-  {
-
-  }
-  public logincheck(username: any, password: any) {
-    let data = { success: 0 };
-
-    // this.xhttp = new XMLHttpRequest();
-
-    // /* this.xhttp.ontimeout = function () {
-    //   console.error("The request  "  + " timed out.");
-    // }; */
-    // this.xhttp.open("GET", "http://www.dbdwater.com/smartmeter_webapp/api/rest/login/getLoginDetails", false);
-    // this.xhttp.setRequestHeader("Content-type", "application/json");
-    // this.xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
-    // this.xhttp.setRequestHeader(
-    //   "Authorization",
-    //   "Basic " + btoa(username + ":" + password)
-    // );
-    // this.xhttp.send();
-
-
-
-  }
-
   login() {
     //this.checklogin();
     if(this.formData.agree){
@@ -99,19 +74,19 @@ export class LoginPage {
               this.storage.set("token", token);
               this.storage.set("user", this.formData.phone);
               this.storage.set("pass", this.formData.pass);
-              //thx mike for hack to remove back btn
-              this.storage.get("custtype").then(resp => {
-                if (resp[0] == "CUSTOMER") {
-                  console.log(resp[0]);
+
+
+                if (response.roles[0] == "CUSTOMER") {
+                  console.log(response.roles[0]);
                   this.navCtrl.setRoot(DashboardPage, null, { animate: true });
                 }
-                else if (resp[0] == "SYSTEM") {
+                else if (response.roles[0] == "SYSTEM") {
                   this.navCtrl.setRoot(DbadminPage, null, { animate: true });
                 }
                 else {
                   this.navCtrl.setRoot(GroupPage, null, { animate: true });
                 }
-              });
+
             }
             else {
 

@@ -41,19 +41,9 @@ export class PopoverPageComponent {
     nav.setRoot(ProfilepagePage);
   }
   passwordp() {
-    /*let popover = this.popoverCtrl.create(PopoverPageComponent);
-    //let popover = this.navParams.get("myData");
-    console.log("popover " + popover);
-
-       popover.dismiss();*/
     this.viewCtrls.dismiss();
     const root = this.app.getRootNav();
-    //console.log("root " + root);
-   // root.dismiss();
     root.popToRoot();
-
-    //let popMenuRoot = this.app.getR();
-    //console.log("popMenuRoot " + popMenuRoot);
     let nav = this.app.getRootNav();
     nav.setRoot(PasswordPage);
   }
@@ -65,6 +55,12 @@ export class PopoverPageComponent {
     nav.setRoot(PhotoPage);
   }
   logout() {
+    this.storage.remove("email");
+    this.storage.remove("logo");
+    this.storage.remove("auth");
+    this.storage.remove("custid");
+    this.storage.remove("custtype");
+    this.storage.remove("token");
     this.storage.remove("user");
     this.storage.remove("pass");
     this.viewCtrls.dismiss();

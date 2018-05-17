@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>customerdetails</ion-title>
+    <ion-title>Customer Details</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -21,31 +21,31 @@
                 <button ion-button color="primary" (click)="onClicked(!edit)">{{edit? "save" : "edit"}}</button>
                 <button ion-button (click)="backing()">Back</button>
                 <button ion-button (click)="Dashboard()">Dashboard</button>
-      
+
                 </p></div>
-                
-                    
-                
-            
+
+
+
+
       <ion-list>
-          <ion-card>              
-           <ion-card-content>           
+          <ion-card>
+           <ion-card-content>
               <ion-item>
-                <ion-label  stacked>firstname</ion-label>
+                <ion-label  stacked>First Name</ion-label>
                 <ion-input type="text" name="firstname" value="rohit" [disabled]="!edit" ></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label  stacked>lastname</ion-label>
+                <ion-label  stacked>Last Name</ion-label>
                 <ion-input type="text" name="lastname" value="lagisetty" [disabled]="!edit"  ></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label  stacked>username</ion-label>
+                <ion-label  stacked>Username</ion-label>
                 <ion-input type="text" name="username" value="rohit lagisetty" [disabled]="!edit" ></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label  stacked>email</ion-label>
+                <ion-label  stacked>E-Mail</ion-label>
                 <ion-input type="email" name="email"[(ngModel)]="getInfo.name" [disabled]="!edit" ></ion-input>
-              </ion-item> 
+              </ion-item>
                         <ion-item>
                     <ion-label stacked>User Type *</ion-label>
                     <ion-select id="form_control_privilege" name="privilege" [disabled]="!edit" ng-model="getInfo.privilege" ng-disabled="true" disabled="disabled">
@@ -62,7 +62,7 @@
                         <ion-option>Group Admin</ion-option>
                         <ion-option>Associate</ion-option>
                       </ion-select>
-                    </ion-item>  
+                    </ion-item>
                     <ion-item>
                         <ion-label  stacked>Designation</ion-label>
                         <ion-input type="text" name="Designation" value="" [disabled]="!edit" ></ion-input>
@@ -78,13 +78,13 @@
                         <ion-item>
                             <ion-label  stacked>Status</ion-label>
                             <ion-input type="text" name="Status" value="ACTIVE" [disabled]="!edit" ></ion-input>
-                          </ion-item>                  
+                          </ion-item>
                         </ion-card-content>
                         </ion-card>
-      
+
             </ion-list>
-            
+
           </form>
         </div>
-      
+
       </ion-content>

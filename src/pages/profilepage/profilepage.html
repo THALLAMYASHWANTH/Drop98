@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-title>
-      
+
        <span class="center">Profile Page</span>
     </ion-title>
   </ion-navbar>
@@ -23,32 +23,32 @@
               <button ion-button color="primary" (click)="onClicked(!edit)">{{edit? "save" : "edit"}}</button>
               <button ion-button (click)="backing()">Back</button>
             </p></div>
-            
-                
-            
-        
+
+
+
+
  <ion-list>
-      <ion-card>              
-       <ion-card-content>           
+      <ion-card>
+       <ion-card-content>
           <ion-item>
-            <ion-label  stacked>firstname</ion-label>
+            <ion-label  stacked>First Name</ion-label>
             <ion-input type="text" name="firstname" value="akhil" [disabled]="!edit" ></ion-input>
           </ion-item>
       <ion-item>
-            <ion-label  stacked>lastname</ion-label>
+            <ion-label  stacked>Last Name</ion-label>
             <ion-input type="text" name="lastname" value="sai" [disabled]="!edit"  ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label  stacked>username</ion-label>
+            <ion-label  stacked>Username</ion-label>
             <ion-input type="text" name="username" value="akhil sai" [disabled]="!edit" ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label  stacked>email</ion-label>
+            <ion-label  stacked>E-Mail</ion-label>
             <ion-input type="email" name="email"[(ngModel)]="getInfo.name" [disabled]="!edit" ></ion-input>
-          </ion-item> 
+          </ion-item>
           <div class="fileinput-new thumbnail" ng-show="userDetails.logo == null" style="width: 200px; height: 150px;">
               <img src="../assets/imgs/user.png" alt="">
-              
+
             </div>
             <ion-item>
                 <ion-label stacked>User Type *</ion-label>
@@ -66,7 +66,7 @@
                     <ion-option>Group Admin</ion-option>
                     <ion-option>Associate</ion-option>
                   </ion-select>
-                </ion-item>  
+                </ion-item>
                 <ion-item>
                     <ion-label  stacked>Designation</ion-label>
                     <ion-input type="text" name="Designation" value="" [disabled]="!edit" ></ion-input>
@@ -78,12 +78,12 @@
                     <ion-item>
                         <ion-label  stacked>Status</ion-label>
                         <ion-input type="text" name="Status" value="ACTIVE" [disabled]="!edit" ></ion-input>
-                      </ion-item>                  
+                      </ion-item>
                     </ion-card-content>
                     </ion-card>
 
         </ion-list>
-        
+
       </form>
     </div>
 
