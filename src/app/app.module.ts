@@ -1,3 +1,8 @@
+import { ItemDetailsPage } from './../pages/item-details/item-details';
+import { ForgotPassPage } from './../pages/forgot-pass/forgot-pass';
+import { HomePage } from './../pages/home/home';
+import { ContactPage } from './../pages/contact/contact';
+import { AboutPage } from './../pages/about/about';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Http, HttpModule } from '@angular/http';
@@ -10,15 +15,11 @@ import { ProfilepagePage } from '../pages/profilepage/profilepage';
 import { PopoverPageComponent } from "../components/popover-page/popover-page";
 import { IonicStorageModule } from "@ionic/storage";
 import { PasswordPage } from "../pages/password/password";
-import { ForgotPassPage } from "../pages/forgot-pass/forgot-pass";
 import { OtpPage } from "../pages/otp/otp";
 import { PhotoPage } from "../pages/photo/photo";
 import {TermsPage} from "../pages/terms/terms";
 import { DashboardPage } from "../pages/dashboard/dashboard";
 import { HelloIonicPage } from "../pages/hello-ionic/hello-ionic";
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DbadminPage } from '../pages/dbadmin/dbadmin';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -31,20 +32,7 @@ import { RemoteServiceProvider } from "../providers/remote-service/remote-servic
 import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,DbadminPage,
-    LoginPage,
-    WelcomePage,GroupPage,
-    SignupPage,
-    ForgotPassPage,
-    OtpPage,TermsPage,
-    DashboardPage,
-    PopoverPageComponent,
-    HelloIonicPage,ProfilepagePage,PasswordPage,PhotoPage,InvoicePage,
-    CustomerdetailsPage
+    MyApp,AboutPage,ContactPage,HomePage,ForgotPassPage,ItemDetailsPage,HelloIonicPage,TabsPage
   ],
   imports: [
     BrowserModule,
@@ -67,14 +55,14 @@ import { HttpClientModule } from "@angular/common/http";
     DashboardPage,
     PopoverPageComponent,
     HelloIonicPage,ProfilepagePage,PhotoPage,InvoicePage,CustomerdetailsPage
-    
+
   ],
   providers: [
     StatusBar,
     SplashScreen,
     NativeStorage,
     /* Toast, */
-    Storage,
+    IonicStorageModule,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     RemoteServiceProvider
   ]
