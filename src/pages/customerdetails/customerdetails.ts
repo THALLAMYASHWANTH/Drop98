@@ -1,3 +1,4 @@
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
@@ -18,24 +19,20 @@ export class CustomerdetailsPage {getInfo: any;
   edit: boolean = null;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage,public remoteService:RemoteServiceProvider) {
     this.getInfo={};
     this.edit = false;
-    storage.get('user').then((val) => {
-      this.getInfo.name = val;
-    });
-    storage.get("logo").then(val => {
-      this.getInfo.userphoto = val;
-      console.log(val);
-    });
-    storage.get("email").then(val => {
-      this.getInfo.email = val;
-    });
-    storage.get("auth").then(val => {
-      this.getInfo.loggedin = val;
-    });
-    storage.get("custtype").then(val => {
-      this.getInfo.privilege = val;
+    this.storage.get("token").then(val => {
+      let token = val;
+      this.storage.get("custid").then(val => {
+        let url = "http://www.dbdwater.com/smartmeter_webapp/api/rest/managecustomers/getCustomers/" + val;
+
+
+        this.remoteService.getPosts(url, token).subscribe((data) => {
+
+          console.log(data);
+        });
+      });
     });
   }
 

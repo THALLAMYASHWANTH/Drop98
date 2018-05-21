@@ -8,7 +8,7 @@ import "rxjs/add/observable/from";
 import { Storage } from "@ionic/storage";
 import { Http, HttpModule } from '@angular/http';
 import { RemoteServiceProvider } from "./../../providers/remote-service/remote-service";
-
+import { GaugesModule } from 'ng-canvas-gauges/lib';
 
 declare var google: any;
 
@@ -68,6 +68,8 @@ export class HelloIonicPage {
   }
   return color;
 }
+
+
   getpaysummary()
   {
     this.getInfo = {};
