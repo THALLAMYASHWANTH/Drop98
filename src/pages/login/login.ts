@@ -59,7 +59,7 @@ export class LoginPage {
         let token=btoa(this.formData.phone + ":" + this.formData.pass);
         this.remoteService
           .getPosts(
-            "http://www.dbdwater.com/smartmeter_webapp/api/rest/login/getLoginDetails",
+            "https://www.dbdwater.com/smartmeter_webapp/api/rest/login/getLoginDetails",
             token
           )
           .subscribe(data => {
