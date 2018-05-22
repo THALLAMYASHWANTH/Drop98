@@ -118,7 +118,7 @@ else{
       return false;
     }
     if (flag == 1 && flag2 == 1) {
-      this.msg1 = "login successfull";
+      //this.msg1 = "login successfull";
     return true;
     }
   }

@@ -8,8 +8,12 @@ import "rxjs/add/observable/from";
 import { Storage } from "@ionic/storage";
 import { Http, HttpModule } from '@angular/http';
 import { RemoteServiceProvider } from "./../../providers/remote-service/remote-service";
+<<<<<<< HEAD
 import * as HighCharts from 'highcharts';
 import {HighchartsMore} from 'highcharts-more';
+=======
+import { GaugesModule } from 'ng-canvas-gauges/lib';
+>>>>>>> dd83fca76794752d1742c77cac8065a31ee8ec47
 
 declare var google: any;
 
@@ -71,6 +75,8 @@ export class HelloIonicPage {
   }
   return color;
 }
+
+
   getpaysummary()
   {
     this.getInfo = {};

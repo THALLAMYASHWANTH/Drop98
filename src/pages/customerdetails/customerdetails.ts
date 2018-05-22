@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import { Component ,ViewChild, OnInit, Renderer, Input } from '@angular/core';
+=======
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { Component } from '@angular/core';
+>>>>>>> dd83fca76794752d1742c77cac8065a31ee8ec47
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
 import { DashboardPage } from '../dashboard/dashboard';
@@ -66,6 +71,7 @@ export class CustomerdetailsPage implements OnInit {
       this.renderer.setElementStyle(this.cardContent1.nativeElement, "max-height", "500px");
       this.renderer.setElementStyle(this.cardContent1.nativeElement, "padding", "13px 16px");
 
+<<<<<<< HEAD
     }
 
     this.accordionExapanded = !this.accordionExapanded;
@@ -92,22 +98,22 @@ export class CustomerdetailsPage implements OnInit {
  
 /*
      this.getInfo={};
+=======
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage,public remoteService:RemoteServiceProvider) {
+    this.getInfo={};
+>>>>>>> dd83fca76794752d1742c77cac8065a31ee8ec47
     this.edit = false;
-    storage.get('user').then((val) => {
-      this.getInfo.name = val;
-    });
-    storage.get("logo").then(val => {
-      this.getInfo.userphoto = val;
-      console.log(val);
-    });
-    storage.get("email").then(val => {
-      this.getInfo.email = val;
-    });
-    storage.get("auth").then(val => {
-      this.getInfo.loggedin = val;
-    });
-    storage.get("custtype").then(val => {
-      this.getInfo.privilege = val;
+    this.storage.get("token").then(val => {
+      let token = val;
+      this.storage.get("custid").then(val => {
+        let url = "http://www.dbdwater.com/smartmeter_webapp/api/rest/managecustomers/getCustomers/" + val;
+
+
+        this.remoteService.getPosts(url, token).subscribe((data) => {
+
+          console.log(data);
+        });
+      });
     });
   
 */
