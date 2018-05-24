@@ -32,19 +32,19 @@
        <ion-card-content>
           <ion-item>
             <ion-label  stacked>First Name</ion-label>
-            <ion-input type="text" name="firstname" value="akhil" [disabled]="!edit" ></ion-input>
+            <ion-input type="text" name="firstname" [(ngModel)]="getInfo.firstname" [disabled]="!edit" ></ion-input>
           </ion-item>
       <ion-item>
             <ion-label  stacked>Last Name</ion-label>
-            <ion-input type="text" name="lastname" value="sai" [disabled]="!edit"  ></ion-input>
+            <ion-input type="text" name="lastname" [(ngModel)]="getInfo.lastname" [disabled]="!edit"  ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label  stacked>Username</ion-label>
-            <ion-input type="text" name="username" value="akhil sai" [disabled]="!edit" ></ion-input>
+            <ion-label  stacked>Display name</ion-label>
+            <ion-input type="text" name="username" [(ngModel)]="getInfo.username" [disabled]="!edit" ></ion-input>
           </ion-item>
           <ion-item>
             <ion-label  stacked>E-Mail</ion-label>
-            <ion-input type="email" name="email"[(ngModel)]="getInfo.name" [disabled]="!edit" ></ion-input>
+            <ion-input type="email" name="email" [(ngModel)]="getInfo.email" [disabled]="!edit" ></ion-input>
           </ion-item>
           <div class="fileinput-new thumbnail" ng-show="userDetails.logo == null" style="width: 200px; height: 150px;">
               <img src="../assets/imgs/user.png" alt="">
