@@ -8,12 +8,6 @@ import "rxjs/add/observable/from";
 import { Storage } from "@ionic/storage";
 import { Http, HttpModule } from '@angular/http';
 import { RemoteServiceProvider } from "./../../providers/remote-service/remote-service";
-<<<<<<< HEAD
-import * as HighCharts from 'highcharts';
-import {HighchartsMore} from 'highcharts-more';
-=======
-import { GaugesModule } from 'ng-canvas-gauges/lib';
->>>>>>> dd83fca76794752d1742c77cac8065a31ee8ec47
 
 declare var google: any;
 
@@ -24,6 +18,9 @@ declare var google: any;
 })
 export class HelloIonicPage {
   totalusage=0;
+  drinkingusage=0;
+  utilwaterusage=0;
+  otherwaterusage=0;
   otherwater=[];
   postList: any;
     monthlabel=[];
@@ -43,6 +40,7 @@ export class HelloIonicPage {
     response: any;
     utilwater=[];
     drinkwater=[];
+
     //barChart: any;
     wsourcechart: any;
     wdrinkchart: any;
@@ -65,7 +63,7 @@ export class HelloIonicPage {
       this.getpaysummary();
       this.getmeterstatus();
       this.sample();
-      this.showChart;
+      //this.showChart;
   }
   getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -88,7 +86,7 @@ export class HelloIonicPage {
 
           this.remoteService.getPosts(url, token).subscribe((data) => {
             this.response = data;
-            console.log(data);
+            //console.log(data);
             let chartdata = [];
             for (var key in data) {
               if (data.hasOwnProperty(key)) {
@@ -159,7 +157,7 @@ export class HelloIonicPage {
         let url = "https://www.dbdwater.com/smartmeter_webapp/api/rest/meter/getMeterStatus/" + val;
         this.remoteService.getPosts(url, token).subscribe((data) => {
           this.response = data;
-          console.log(data);
+          //console.log(data);
           for (var k in data)
           {
             if (k =="Utility Water$Ltr")
@@ -181,7 +179,7 @@ export class HelloIonicPage {
               }
             }
           }
-          console.log(this.drinkwater[7],this.utilwater[7]);
+         // console.log(this.drinkwater[7],this.utilwater[7]);
 
 
           this.wsourcechart = new Chart(this.wsourcecanvas.nativeElement, {
@@ -249,13 +247,34 @@ export class HelloIonicPage {
               ]
             }
           });
-          this.totalusage=0+this.otherwater[7] + this.drinkwater[7] + this.utilwater[7]
+          if (this.drinkwater[7])
+          {
+            this.totalusage = this.totalusage + parseInt(this.drinkwater[7]);
+          }
+          if (this.utilwater[7]) {
+            this.totalusage = this.totalusage + parseInt(this.utilwater[7]);
+
+          }
+          if (this.otherwater[7]) {
+            this.totalusage = this.totalusage + parseInt(this.otherwater[7]);
+
+          }
+          if(this.drinkwater[7]){
+            this.drinkingusage=parseInt(this.drinkwater[7]);
+          }
+          if (this.utilwater[7]) {
+            this.utilwaterusage = parseInt(this.utilwater[7]);
+          }
+          if (this.otherwater[7]) {
+            this.otherwaterusage = parseInt(this.otherwater[7]);
+          }
+
 
         });
       });
     });
   }
-  sample() 
+  sample()
   {
     this.storage.get("token").then(val => {
       let token = val;
@@ -263,164 +282,8 @@ export class HelloIonicPage {
         let url = "https://www.dbdwater.com/smartmeter_webapp/api/rest/meter/getUsageComparisonDataWithinGroupByCustomer/" + val;
         this.remoteService.getPosts(url, token).subscribe((data) => {
           this.response = data;
-          console.log(data)});});});}
-   
-
-
-
-
-showChart(totalOfBudgetAndContingency: number, paidPercentage: number, remainingPercentageExcludingPaid: number, contingencyPercentage: number,
-    spent: number, spentOnChart: number, remainingAmount: number, daysToGo: number, spentOverColor: string, chartId: string) {
-    let chart = HighCharts.chart(chartId, {
-      "chart": {
-        "height": 400,
-        "renderTo": "container",
-        "plotBackgroundColor": null,
-        "plotBackgroundImage": null,
-        "plotBorderWidth": 0,
-        "plotShadow": false,
-        "backgroundColor": "white"
-      },
-      "credits": {
-        "enabled": false
-      },
-      "tooltip": {
-        "enabled": true
-      },
-      "title": {
-        "useHtml": true,
-        "text": "<div style=\"font-size: 1.6rem;\">Remaining</div><br/><div style=\"font-size: 20px;color:" + spentOverColor + "\">" + remainingAmount.toLocaleString() + "</div>",
-        "align": "center",
-        "verticalAlign": "top",
-        "y": 120,
-      },
-      "subtitle": {
-        "useHtml": true,
-        "text": "<div style=\"font-size: 1.6rem;\">Days To Go</div><br/><div style=\"font-size: 16px;\">" + daysToGo + "</div>",
-        "align": "center",
-        "verticalAlign": "top",
-        "y": 170,
-      },
-      "pane": {
-        "center": ["50%", "47%"],
-        "size": "70%",
-        "startAngle": -90,
-        "endAngle": 90,
-        "background": {
-          "borderWidth": 0,
-          "backgroundColor": "transparent",
-          "innerRadius": "95%",
-          "outerRadius": "100%",
-          "shape": "arc"
-        }
-      },
-      "yAxis": [{
-        "lineWidth": 0,
-        "min": 0,
-        "max": totalOfBudgetAndContingency, /* Budget + Contingency */
-        tickColor: 'white',
-        tickWidth: 4,
-        minorTickInterval: 'auto',
-        minorTickLength: 3,
-        minorTickPosition: 'inside',
-        tickPixelInterval: 50,
-        tickPosition: '',
-        tickPositioner: (min, max) => {
-          var ticks = [],
-            tick = min,
-            step = Math.round((max - min) / 10);
-          while (tick < max - step / 2) {
-            ticks.push(Math.round(tick));
-            tick += step;
-          }
-          ticks.push(Math.round(max));
-          return ticks;
-        },
-        tickLength: 30,
-
-        "labels": {
-          "enabled": true,
-          distance: 30,
-          style: {
-            color: '#50a2a7',
-            font: '11px Trebuchet MS, Verdana, sans-serif'
-          }
-        },
-        "title": {
-          "text": "",
-          "useHTML": false,
-          "y": 80
-        },
-        "pane": 0
-      }],
-      "plotOptions": {
-        "series": {
-          "enableMouseTracking": false
-        },
-        "pie": {
-          "dataLabels": {
-            "enabled": true,
-            "distance": 0,
-            "style": {
-              "fontWeight": "bold",
-              "color": "white",
-              "textShadow": "0px 1px 2px black"
-            }
-          },
-          "size": "75%",
-          "startAngle": -90,
-          "endAngle": 90,
-          "center": ["50%", "47%"]
-        },
-        "gauge": {
-          "dataLabels": {
-            "enabled": false
-          },
-          "pivot": {
-            "radius": 80,
-            "borderWidth": 1,
-            "borderColor": "transparent",
-            "backgroundColor": "white"
-          },
-          "dial": {
-            "radius": "100%",
-            "backgroundColor": "#e9b44c",
-            "borderColor": "",
-            "baseWidth": 60,
-            "topWidth": 1,
-            "baseLength": "5%",
-            "rearLength": "5%"
-          }
-        }
-      },
-
-      "series": [{
-        "type": "pie",
-        "name": "Budget",
-        "innerSize": "80%",
-        "data": [{
-          "y": paidPercentage, /* Paid as percentage */
-          "name": "",
-          color: 'rgba(80,162,167, 0.3)'
-        }, {
-          "y": remainingPercentageExcludingPaid, /* Remaining as percentage excluding paid */
-          "name": "",
-          color: 'rgba(187,187,187, 0.2)'
-        }, {
-          "y": contingencyPercentage, /* Contingency as percentage */
-          "name": "",
-          color: 'rgba(155,41,21, 0.9)'
-        }]
-      }, {
-        "type": "gauge",
-        "name": "Spent",
-        "data": [spentOnChart], /* Spent */
-        "dial": {
-          "rearLength": 0
-        }
-      }],
-    });
-  }
+        //  console.log(data)
+        });});});}
     presentPopover(myEvent) {
         let popover = this.popoverCtrl.create(PopoverPageComponent);
       //{ myData: this.popoverCtrl.create(PopoverPageComponent)};

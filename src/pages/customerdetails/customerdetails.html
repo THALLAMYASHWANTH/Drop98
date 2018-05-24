@@ -12,12 +12,10 @@
   </ion-navbar>
 
 </ion-header>
+<ion-content>
 
-  
-<ion-card>
-  Customer details
- 
-</ion-card>
+
+
 <ion-card class="some">
   <ion-card-header (click)="toggleAccordion()">
     <ion-list>
@@ -30,24 +28,24 @@
     </ion-list>
   </ion-card-header>
   <ion-card-content #cc>
-    
+
     <ion-item>
         <ion-label  stacked>First Name</ion-label>
-        <ion-input type="text" value="rohit" [disabled]="!edit" ></ion-input>
+        <ion-input type="text" [(ngModel)]="getInfo.firstname" [disabled]="!edit" ></ion-input>
       </ion-item>
       <ion-item>
           <ion-label  stacked>Last Name</ion-label>
-          <ion-input type="text"  value="lagisetty" [disabled]="!edit"  ></ion-input>
+          <ion-input type="text"  [(ngModel)]="getInfo.lastname" [disabled]="!edit"  ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label  stacked>Username</ion-label>
-          <ion-input type="text"  value="rohit lagisetty" [disabled]="!edit" ></ion-input>
+          <ion-input type="text"  [(ngModel)]="getInfo.email" [disabled]="!edit" ></ion-input>
         </ion-item>
         <ion-item>
             <ion-label  stacked>Group</ion-label>
-            <ion-input type="text"  value="vaishnav homes" [disabled]="!edit" ></ion-input>
+            <ion-input type="text"  [(ngModel)]="getInfo.group" [disabled]="!edit" ></ion-input>
           </ion-item>
-       
+
                   <ion-item>
               <ion-label stacked>Customer Type *</ion-label>
               <ion-select id="form_control_privilege"  ng-model="getInfo.privilege" ng-disabled="true" disabled="disabled">
@@ -57,17 +55,17 @@
                   <ion-option value="Patient">Patient</ion-option>
                   <ion-option value="Guest">Guest</ion-option>
               </ion-select>
-             
+
             </ion-item>
             <ion-item>
                 <ion-label  stacked>Bill Style</ion-label>
                 <ion-input type="text"  value="Residential" [disabled]="!edit" ></ion-input>
               </ion-item>
-               
-                
-     
+
+
+
     <ng-content>
-      
+
     </ng-content>
   </ion-card-content>
 </ion-card>
@@ -83,43 +81,43 @@
       </ion-list>
     </ion-card-header>
     <ion-card-content #cc1>
-      
+
       <ion-item>
           <ion-label  stacked>Address Line1</ion-label>
-          <ion-input type="text" value="" [disabled]="!edit" ></ion-input>
+          <ion-input type="text" [(ngModel)]="getInfo.ad1" [disabled]="!edit" ></ion-input>
         </ion-item>
         <ion-item>
             <ion-label  stacked>Address Line2</ion-label>
-            <ion-input type="text" value="" [disabled]="!edit" ></ion-input>
+            <ion-input type="text" [(ngModel)]="getInfo.ad2" [disabled]="!edit" ></ion-input>
           </ion-item>
           <ion-item>
               <ion-label  stacked>Address Line3</ion-label>
-              <ion-input type="text" value="" [disabled]="!edit" ></ion-input>
+              <ion-input type="text" [(ngModel)]="getInfo.ad3" [disabled]="!edit" ></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label  stacked>Location Type</ion-label>
-                <ion-input type="text" value="" [disabled]="!edit" ></ion-input>
+                <ion-input type="text" [(ngModel)]="getInfo.adtype" [disabled]="!edit" ></ion-input>
               </ion-item>
               <ion-item>
                   <ion-label  stacked>City</ion-label>
-                  <ion-input type="text" value="" [disabled]="!edit" ></ion-input>
+                  <ion-input type="text" [(ngModel)]="getInfo.city" [disabled]="!edit" ></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label  stacked>State</ion-label>
-                    <ion-input type="text" value="" [disabled]="!edit" ></ion-input>
+                    <ion-input type="text" [(ngModel)]="getInfo.state" [disabled]="!edit" ></ion-input>
                 </ion-item>
                   <ion-item>
                       <ion-label  stacked>Country</ion-label>
-                      <ion-input type="text" value="India" [disabled]="!edit" ></ion-input>
+                      <ion-input type="text" [(ngModel)]="getInfo.country" [disabled]="!edit" ></ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label  stacked>Pincode</ion-label>
-                        <ion-input type="text" value="" [disabled]="!edit" ></ion-input>
+                        <ion-input type="text" [(ngModel)]="getInfo.pin" [disabled]="!edit" ></ion-input>
                       </ion-item>
 
-        
+
       <ng-content>
-        
+
       </ng-content>
     </ion-card-content>
   </ion-card>
@@ -158,12 +156,12 @@
                     </ion-item>
                     <table>
                         <thead>
-                 
-                    
+
+
                           <!-- HEADERS -->
-                         
+
                         <!-- CONTENT -->
-                       
+
                         <!-- PAGINATION -->
                         <tfoot>
                           <tr>
@@ -173,11 +171,11 @@
                           </tr>
                         </tfoot>
                       </table>
-                 
-                    
-              
-              
-                     
+
+
+
+
+
                 <div class="row header">
                   <div class="col"></div>
                   <div class="col">Serial Number</div>
@@ -197,14 +195,14 @@
                           <ion-option value="Society">20182000015</ion-option>
                           <ion-option value="Member">20182000032</ion-option>
                           <ion-option value="Patient">t2345</ion-option>
-                          
+
                       </ion-select> </div>
                   <div class="col">
                           <ion-select>
 
-                          </ion-select>                   
+                          </ion-select>
                   </div>
-               </div>  
+               </div>
                <div class="row">
                   <div class="col"><ion-radio></ion-radio></div>
                 <div class="col">201802000032</div>
@@ -216,30 +214,30 @@
                         <ion-option value="Society">20182000015</ion-option>
                         <ion-option value="Member">20182000032</ion-option>
                         <ion-option value="Patient">t2345</ion-option>
-                        
+
                     </ion-select> </div>
                 <div class="col">
                         <ion-select>
-                          
-                        </ion-select>                   
-                </div>
-             </div>  
-                 
-               
-               
-              
 
-         
+                        </ion-select>
+                </div>
+             </div>
+
+
+
+
+
+
         <ng-content>
-          
+
         </ng-content>
       </ion-card-content>
-     
+
     </ion-card>
     <button ion-button (click)="backing()">Back</button>
 
 
-
+</ion-content>
    <!-- <ion-content padding>
         <div>
           <form class="center">

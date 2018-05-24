@@ -27,8 +27,8 @@ export class RemoteServiceProvider {
     let headersObj = new Headers();
     headersObj.append('Authorization', authHeader);
 
-    console.log(testURL);
-    console.log(authHeader);
+    //console.log(testURL);
+    //console.log(authHeader);
 
     return this.http.get(testURL, { headers: headersObj })
       .map((res: Response) => res.json());

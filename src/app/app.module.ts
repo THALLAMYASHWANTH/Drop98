@@ -30,14 +30,12 @@ import { InvoicePage } from '../pages/invoice/invoice'; //import { Toast } from 
 import { CustomerdetailsPage } from "../pages/customerdetails/customerdetails";
 import { RemoteServiceProvider } from "../providers/remote-service/remote-service";
 import { HttpClientModule } from "@angular/common/http";
-import { GaugesModule } from 'ng-canvas-gauges/lib';
 @NgModule({
   declarations: [
     MyApp, AboutPage, ContactPage, HomePage, ForgotPassPage, ItemDetailsPage, HelloIonicPage, TabsPage, PasswordPage, GroupPage, DbadminPage,LoginPage,WelcomePage,TermsPage,SignupPage,OtpPage,DashboardPage,PopoverPageComponent,ProfilepagePage,PhotoPage,InvoicePage,CustomerdetailsPage,GroupPage
   ],
   imports: [
     BrowserModule,
-    GaugesModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),

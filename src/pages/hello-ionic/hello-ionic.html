@@ -1,5 +1,3 @@
-<div [id]="data?.chartId" class="my-chart"></div>
-
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
@@ -53,7 +51,7 @@
   </ion-card-header>
   <ion-card-content>
     <canvas #wsource></canvas>
-    <div class="center">Total Usage:{{this.totalusage}}</div>
+    <div class="center">Total Usage:{{totalusage}}</div>
   </ion-card-content>
 </ion-card>
 
@@ -63,6 +61,7 @@
   </ion-card-header>
   <ion-card-content>
     <canvas #wdrink></canvas>
+    <div class="center">Drinking Water Usage:{{drinkingusage}}</div>
   </ion-card-content>
 </ion-card>
 
@@ -72,6 +71,7 @@
   </ion-card-header>
   <ion-card-content>
     <canvas #wutility></canvas>
+      <div class="center">Utility Water Usage:{{utilwaterusage}}</div>
   </ion-card-content>
 </ion-card>
 
@@ -81,6 +81,7 @@
   </ion-card-header>
   <ion-card-content>
     <canvas #wother></canvas>
+      <div class="center">Other Water Usage:{{otherwaterusage}}</div>
   </ion-card-content>
 </ion-card>
 
